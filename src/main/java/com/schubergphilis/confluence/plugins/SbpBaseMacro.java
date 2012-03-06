@@ -75,17 +75,17 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
         catch (ValidationException e)
         {
             log.info("validation error: ".concat(e.toString()));
-            throw new MacroException("tableau-plugin validation error: ".concat(e.toString()));
+            throw new MacroException("validation error: ".concat(e.getMessage().toString()));
         }
         catch (AuthenticationException e)
         {
-            log.error("authentication error: ".concat(e.toString()).concat(" please contact your confluence or tableau server administrator"));
-            throw new MacroException("tableau-plugin error: there is an authentication problem while retrieving the report, please contact your confluence or tableau server administrator");
+            log.error("authentication error: ".concat(e.getMessage().toString()).concat(" please contact your confluence or tableau server administrator"));
+            throw new MacroException("authentication error: there is an authentication problem while retrieving the report, please contact your confluence or tableau server administrator");
         }
         catch (Exception e)
         {
             log.error("unexpected error: please contact your confluence or tableau server administrator, ".concat(e.toString()));
-            throw new MacroException("tableau-plugin unexpected error: please contact your confluence or tableau server administrator: ".concat(e.toString()));
+            throw new MacroException("unexpected error: please contact your confluence or tableau server administrator: ".concat(e.toString()));
         }
     }
 

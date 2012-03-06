@@ -47,7 +47,7 @@ public class ConfigurationManager
         if(data == null)
         {
             log.error("no key values configured in tableau-plugin");
-            throw new ValidationException("no key values configured, contact your confluence administrator");
+            throw new ValidationException("Check plugin configuration (no key/values configured), or contact your confluence administrator");
         }
 
         if(data.length() > 0)
