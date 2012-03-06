@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.schubergphilis.confluence.plugins</groupId>
     <artifactId>tableau-plugin</artifactId>
-    <version>0.62</version>
+    <version>0.63</version>
 
     <organization>
         <name>Schuberg Philis</name>
