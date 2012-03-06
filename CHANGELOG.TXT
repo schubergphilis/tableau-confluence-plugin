@@ -1,3 +1,6 @@
+############################## 03/06/2012 v0.63 ###############################
+- bugfix: ampersant missing when using parameters in interactive mode
+
 ############################## 10/24/2011 v0.62 ###############################
 - Don't show errors in preview mode
 - Optional parameters parameter
@@ -27,4 +30,3 @@
 
 ############################## 06/19/2011 v0.03 ##############################
 - Initial version
-
