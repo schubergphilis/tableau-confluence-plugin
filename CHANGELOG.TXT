@@ -1,0 +1,30 @@
+############################## 10/24/2011 v0.62 ###############################
+- Don't show errors in preview mode
+- Optional parameters parameter
+
+############################## 10/18/2011 v0.61 ###############################
+- bugfix: authentication issue when user is not authenticated against the
+  tableau server, png will load with 401 error, now trusted authentication
+  is used for displaying png, interactive and export context.
+
+############################## 09/27/2011 v0.6 ###############################
+- bugfix: authentication issue when user is not authenticated against the
+  tableau server, png will load with 401 error
+
+############################## 08/22/2011 v0.5 ###############################
+- Trusted authentication for export context
+
+############################## 06/22/2011 v0.4 ###############################
+- removed border
+- option to add border style
+- spaces in the parameters workbook and report can contain spaces
+- button is aligned right
+- tabs parameter added
+- if embed parameter is false, interactive view will be opened in a new window
+- unit tests added
+- license added
+- changelog added
+
+############################## 06/19/2011 v0.03 ##############################
+- Initial version
+

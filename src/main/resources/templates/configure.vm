@@ -1,0 +1,79 @@
+#requireResourcesForContext("com.schubergphilis.com.tableau-plugin")
+
+<script type="text/javascript">
+
+    jQuery(document).ready(
+        function()
+        {
+            var table = jQuery("table[name=tblKeyValues]");
+
+            if(document.getElementById('data'))
+            {
+                var serverlist = document.getElementById('data').value.split('#');
+
+                for(var i=0; i<serverlist.length;i++)
+                {
+                    var items = serverlist[i].split(';');
+
+                    if(items[0] && items[1])
+                    {
+                        table.append('<tr><td>'+getInput(items[0])+'</td><td>'+getInput(items[1])+'</td></tr>');
+                    }
+                }
+            }
+
+            table.append('<tr><td>'+getInput('')+'</td><td>'+getInput('')+'</td></tr>');
+        }
+    );
+
+    function getInput(value)
+    {
+        return "<input type='input' value='"+value+"'></input>";
+    }
+
+    function setData()
+    {
+        var newData = '';
+        jQuery('#tblKeyValues tr').each(function()
+        {
+            var keytd = jQuery(this).find("td").eq(0);
+            var key = (keytd[0].childNodes[0].value);
+
+            var valuetd = jQuery(this).find("td").eq(1);
+            var value = (valuetd[0].childNodes[0].value);
+
+            if(value && value != '')
+            {
+                if(newData != '')
+                    newData += '#';
+                newData += key + ';' + value;
+            }
+        });
+
+        jQuery("input[name=data]").val(newData);
+    }
+
+</script>
+<h1>Configure Tableau Plugin</h1>
+<form name="configuration" action="set.action" method="GET">
+   <input type="hidden" id="data" name="data" value="$Data">
+   </br>
+   Notes:</br>
+   - enter the default name / server in the first row
+   <table id="tblKeyValues" name="tblKeyValues">
+        <thead>
+            <tr>
+                <td>Key</td>
+                <td>Value</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+   </table>
+
+   <input type="submit" value="Save" onclick="setData()" />
+</form>
+
+#parse ( "/template/includes/actionmessages.vm" )
+#parse ( "/template/includes/actionerrors.vm" )
