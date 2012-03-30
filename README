@@ -51,7 +51,7 @@ Tableau Server Configuration
 Installation of plugin
  - Get the jar
 	- Download the latest jar file from: https://plugins.atlassian.com/plugins/tableau-plugin
-	- Or build it from the source : [github url here]
+	- Or build it from the source : https://github.com/schubergphilis/tableau-confluence-plugin
  - Login as a confluence admin
  - Goto the menu 'Browse'
  - Choose 'Confluence Admin'
