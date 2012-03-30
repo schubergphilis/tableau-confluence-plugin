@@ -59,7 +59,26 @@
     <favorites_list name="sbp-tableau-plugin" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="jquery-ui-1.8.13.custom.min.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/js/jquery-ui-1.8.13.custom.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="144" column="57" selection-start="38564" selection-end="38589" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NOTICE" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/NOTICE">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="34" selection-start="448" selection-end="448" vertical-scroll-proportion="0.13709678">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -74,21 +93,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/sbp-tableau-plugin.ipr" />
-        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/plugins/TableauMacro.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/html/TableauRenderer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/ConfigurationManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/plugins/SbpBaseMacro.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/atlassian-plugin.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/plugins/SbpBaseMacro.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/html/TableauRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/exceptions/ValidationException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/exceptions/AuthenticationException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/DefaultValueBehaviour.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/ConfigureTableauPlugin.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/ConfigurationManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/html/BaseHtmlRenderer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/util/http/HttpRequest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/tableau/authentication/TrustedAuthentication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/plugins/TableauMacro.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/js/chartloader.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/configure.vm" />
+        <option value="$PROJECT_DIR$/src/test/java/com/schubergphilis/confluence/html/TableauRendererTest.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="253" />
-    <option name="y" value="97" />
-    <option name="width" value="2168" />
-    <option name="height" value="1063" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="2576" />
+    <option name="height" value="1426" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -116,9 +144,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane />
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files" />
       </pane>
@@ -153,6 +178,18 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="html" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -173,6 +210,114 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sbp-tableau-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tableau-confluence-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sbp-tableau-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tableau-confluence-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="redmond" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sbp-tableau-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tableau-confluence-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="redmond" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sbp-tableau-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tableau-confluence-plugin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -374,15 +519,18 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane">
+        <subPane />
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Modules" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.main.proportions" value="0.30000004" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.externalResources" />
+    <property name="options.lastSelected" value="fileTemplates" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -543,12 +691,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="253" y="97" width="2168" height="1063" extended-state="1" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="2576" height="1426" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32964602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -559,10 +706,11 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18164527" sideWeight="0.44469026" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18164527" sideWeight="0.670354" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3297491" sideWeight="0.0" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32964602" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -623,90 +771,86 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/CHANGELOG.TXT">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/plugins/TableauMacro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="50" selection-start="939" selection-end="939" vertical-scroll-proportion="0.36830103" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/DefaultValueBehaviour.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="63" selection-start="205" selection-end="205" vertical-scroll-proportion="0.17445838" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sbp-tableau-plugin.iws">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+        <state line="4" column="17" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/plugins/SbpBaseMacro.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="23" selection-start="2614" selection-end="2614" vertical-scroll-proportion="2.0448833" />
+        <state line="40" column="0" selection-start="1707" selection-end="1707" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/html/TableauRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="216" column="28" selection-start="5743" selection-end="5743" vertical-scroll-proportion="0.9568221" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/tableau/authentication/TrustedAuthentication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="33" selection-start="563" selection-end="563" vertical-scroll-proportion="0.46977547" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/util/http/HttpRequest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="34" selection-start="484" selection-end="484" vertical-scroll-proportion="-1.0846287" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/exceptions/ValidationException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="19" selection-start="212" selection-end="212" vertical-scroll-proportion="0.29360968" />
+        <state line="26" column="13" selection-start="1030" selection-end="1030" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/html/BaseHtmlRenderer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="30" selection-start="563" selection-end="563" vertical-scroll-proportion="0.6165803" />
+        <state line="28" column="0" selection-start="1086" selection-end="1086" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/exceptions/ValidationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="13" selection-start="1034" selection-end="1034" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LICENSE">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/schubergphilis/confluence/html/TableauRendererTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="67" selection-start="799" selection-end="799" vertical-scroll-proportion="0.8091873" />
+        <state line="21" column="34" selection-start="742" selection-end="742" vertical-scroll-proportion="0.20782396" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/ConfigureTableauPlugin.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/configure.vm">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="40" selection-start="612" selection-end="612" vertical-scroll-proportion="0.55785835" />
+        <state line="22" column="27" selection-start="968" selection-end="968" vertical-scroll-proportion="0.3016129" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/redmond/jquery-ui-1.8.13.custom.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/js/chartloader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="1062" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/ConfigurationManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="41" selection-start="1581" selection-end="1600" vertical-scroll-proportion="0.5215889" />
+        <state line="31" column="13" selection-start="1257" selection-end="1257" vertical-scroll-proportion="0.425" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sbp-tableau-plugin.ipr">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/ConfigureTableauPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="352" column="37" selection-start="18251" selection-end="18251" vertical-scroll-proportion="1.0900798">
+        <state line="29" column="22" selection-start="1155" selection-end="1155" vertical-scroll-proportion="0.39758065" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/configuration/DefaultValueBehaviour.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="12" selection-start="1037" selection-end="1037" vertical-scroll-proportion="0.3564516" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/exceptions/AuthenticationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="13" selection-start="1035" selection-end="1035" vertical-scroll-proportion="0.3564516" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/js/jquery-ui-1.8.13.custom.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="57" selection-start="38564" selection-end="38589" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/atlassian-plugin.xml">
+    <entry file="file://$PROJECT_DIR$/NOTICE">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="21" selection-start="228" selection-end="228" vertical-scroll-proportion="0.0880829">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="12" selection-start="410" selection-end="417" vertical-scroll-proportion="0.2642487">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/schubergphilis/confluence/plugins/TableauMacro.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="53" selection-start="3624" selection-end="3624" vertical-scroll-proportion="0.36960277">
+        <state line="10" column="34" selection-start="448" selection-end="448" vertical-scroll-proportion="0.13709678">
           <folding />
         </state>
       </provider>
