@@ -21,8 +21,8 @@
 ############################## 06/22/2011 v0.4 ###############################
 - removed border
 - option to add border style
-- spaces in the parameters workbook and report can contain spaces
-- button is aligned right
+- names of parameters workbook and report can contain spaces
+- button is aligned left
 - tabs parameter added
 - if embed parameter is false, interactive view will be opened in a new window
 - unit tests added
