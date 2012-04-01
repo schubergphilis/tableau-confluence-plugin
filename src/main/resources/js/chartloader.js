@@ -3,7 +3,6 @@
  * Company: Schuberg Philis
  * Date: 7/14/11
  * Time: 10:20 AM
- * Description: This class includes some helper methods that can be used in all sbp macro's
  *
  *      Licensed to the Apache Software Foundation (ASF) under one
  *      or more contributor license agreements.  See the NOTICE file
