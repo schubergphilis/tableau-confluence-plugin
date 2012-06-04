@@ -24,6 +24,9 @@
 
 package com.schubergphilis.confluence.html;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class TableauRenderer extends BaseHtmlRenderer
 {
     private StringBuffer _result = new StringBuffer();
@@ -43,6 +46,8 @@ public class TableauRenderer extends BaseHtmlRenderer
     private Boolean _isExportContext = false;
     private String _parameters = "";
     private Boolean _renderParameters = false;
+
+    private Map<String, String> _urlParameters = new HashMap<String, String>();
 
     public TableauRenderer()
     {
@@ -64,7 +69,7 @@ public class TableauRenderer extends BaseHtmlRenderer
     public TableauRenderer WithHost(String host, String trustedHost)
     {
         _host = host;
-        _trustedHost =trustedHost;
+        _trustedHost = trustedHost;
         return this;
     }
 
@@ -74,15 +79,15 @@ public class TableauRenderer extends BaseHtmlRenderer
         return this;
     }
 
-    public TableauRenderer WithWidth(Integer width)
+    public TableauRenderer WithSize(Integer width, Integer height)
     {
-        _width = width;
-        return this;
-    }
+        if(width != null && height != null)
+        {
+            _urlParameters.put(":size", String.format("%d,%d", width, height));
+            _width = width;
+            _height = height;
+        }
 
-    public TableauRenderer WithHeight(Integer height)
-    {
-        _height = height;
         return this;
     }
 
@@ -130,8 +135,21 @@ public class TableauRenderer extends BaseHtmlRenderer
 
     public TableauRenderer WithParameters(String parameters)
     {
-        _parameters = parameters;
-        _renderParameters = true;
+        if(parameters != null && parameters.length() > 0)
+        {
+            _urlParameters.put("parameters", parameters);
+            _parameters = parameters;
+            _renderParameters = true;
+        }
+
+        return this;
+    }
+
+    public TableauRenderer WithRefresh(Boolean refresh)
+    {
+        if(refresh)
+            _urlParameters.put(":refresh","true");
+
         return this;
     }
 
@@ -182,12 +200,27 @@ public class TableauRenderer extends BaseHtmlRenderer
         return null;
     }
 
-    private String getSize()
+    private String getPngUrlParameters()
     {
-        if(_width == null || _height == null)
+        StringBuffer result = new StringBuffer();
+
+        if(_urlParameters.size() == 0)
             return "";
 
-        return "?:size=" + _width + "," + _height;
+        result.append("?");
+
+        for(String key : _urlParameters.keySet())
+        {
+            if(result.length()>2)
+                result.append("&");
+
+            if(key.equals("parameters"))
+                result.append(_urlParameters.get(key));
+            else
+                result.append(key+"="+_urlParameters.get(key));
+        }
+
+        return result.toString();
     }
 
     protected String RenderHtml() {
@@ -209,9 +242,7 @@ public class TableauRenderer extends BaseHtmlRenderer
                 .append("src=\"")
                 .append(TableauUrl())
                 .append(".png")
-                .append(getSize())
-                .append(_renderParameters ? (getSize().length() == 0 ? "?" : "&") : "")
-                .append(_parameters)
+                .append(getPngUrlParameters())
                 .append("\"></img>");
 
         if(_showInteractiveButton && !_isExportContext)

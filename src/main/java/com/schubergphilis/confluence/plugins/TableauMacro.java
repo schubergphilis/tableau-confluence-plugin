@@ -77,6 +77,7 @@ public class TableauMacro extends SbpBaseMacro
         Boolean button = getBoolParameter(params, "button", false);
         Boolean noPrint = getBoolParameter(params, "noprint", false);
         String parameters = getStrParameter(params, "parameters", "");
+        Boolean refresh = getBoolParameter(params, "refresh", false);
 
         configManager = new ConfigurationManager(bandanaManager);
         String host = configManager.getValue(environment, DefaultValueBehaviour.firstInList);
@@ -91,8 +92,7 @@ public class TableauMacro extends SbpBaseMacro
             return "Please enter a workbook and a report and hit the refresh button.";
 
         TableauRenderer renderer = new TableauRenderer()
-                .WithHeight(height)
-                .WithWidth(width)
+                .WithSize(width, height)
                 .WithReport(report)
                 .WithWorkbook(workbook)
                 .WithTitle(title)

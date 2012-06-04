@@ -38,7 +38,9 @@
             <parameter name="borderstyle" type="string" default=""/>
             <parameter name="button" type="boolean" default="false"/>
             <parameter name="noprint" type="boolean" default="false"/>
+            <parameter name="refresh" type="boolean" default="false"/>
             <parameter name="parameters" type="string" default=""/>
+
         </parameters>
     </macro>
 

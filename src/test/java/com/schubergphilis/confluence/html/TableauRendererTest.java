@@ -13,7 +13,6 @@ import static org.junit.Assert.assertEquals;
  * Company: Schuberg Philis
  * Date: 6/21/11
  * Time: 2:01 PM
- * Description: This class includes some helper methods that can be used in all sbp macro's
  *
  *      Licensed to the Apache Software Foundation (ASF) under one
  *      or more contributor license agreements.  See the NOTICE file
@@ -120,8 +119,7 @@ public class TableauRendererTest {
     public void Render_Should_Render_Ampersand_When_Size_Is_Known() throws ValidationException, UnsupportedEncodingException {
         // arrange
         _testRenderer.WithWorkbook("TableauWorkbook")
-                     .WithHeight(500)
-                     .WithWidth(500)
+                     .WithSize(500, 500)
                      .WithReport("TableauReport")
                      .WithHost("http://localhost", "http://localhost/trusted/123456789")
                      .WithInteractiveButton(true)
@@ -224,36 +222,6 @@ public class TableauRendererTest {
     }
 
     @Test
-    public void WithWidth_Should_Not_Render_Width_When_Height_Is_Unknown() throws ValidationException, UnsupportedEncodingException {
-        // arrange and act
-        String result = _testRenderer
-                .WithWorkbook("TableauWorkbook")
-                .WithReport("TableauReport")
-                .WithInteractiveButton(true)
-                .WithHost("http://localhost", "http://localhost/trusted/123456789")
-                .WithWidth(100)
-                .Render();
-
-        // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
-    }
-
-    @Test
-    public void WithHeight_Should_Not_Render_Height_When_Width_Is_Unknown() throws ValidationException, UnsupportedEncodingException {
-        // arrange and act
-        String result = _testRenderer
-                .WithWorkbook("TableauWorkbook")
-                .WithReport("TableauReport")
-                .WithInteractiveButton(true)
-                .WithHost("http://localhost", "http://localhost/trusted/123456789")
-                .WithHeight(100)
-                .Render();
-
-        // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
-    }
-
-    @Test
     public void WithHeight_And_WithWidth_Should_Render_Height_And_Width() throws ValidationException, UnsupportedEncodingException {
         // arrange and act
         String result = _testRenderer
@@ -261,8 +229,7 @@ public class TableauRendererTest {
                 .WithReport("TableauReport")
                 .WithInteractiveButton(true)
                 .WithHost("http://localhost", "http://localhost/trusted/123456789")
-                .WithHeight(150)
-                .WithWidth(200)
+                .WithSize(200,150)
                 .Render();
 
         // assert
@@ -402,8 +369,7 @@ public class TableauRendererTest {
                      .WithHost("http://localhost", "http://localhost/trusted/123456789")
                      .WithInteractiveStart(true)
                      .WithParameters("test=bla&foo=bar")
-                     .WithHeight(1200)
-                     .WithWidth(1200);
+                     .WithSize(1200,1200);
 
         // act
         String result = _testRenderer.Render();
@@ -411,4 +377,24 @@ public class TableauRendererTest {
         // assert
         assertEquals(result, "<div style=\"display:inline-block;\"><iframe width=\"1200\" height=\"1200\" frameborder=\"0\" src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport?:embed=yes&:toolbar=yes&:tabs=no&test=bla&foo=bar\" border=\"0\" style=\"border: 0pt none;\" ></iframe></div><br/>");
     }
+
+    @Test
+    public void WithRefresh_Should_Add_Refresh_option_to_url() throws ValidationException
+    {
+        // arrange
+        _testRenderer.WithWorkbook("ExampleWorkbook")
+                .WithReport("view1")
+                .WithSize(500,500)
+                .WithParameters("a=1&b=2")
+                .WithHost("http://localhost", "http://localhost/trusted/123456789")
+                .WithRefresh(true);
+
+        // act
+        String result = _testRenderer.Render();
+
+        // assert
+        String expect = "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/ExampleWorkbook/view1.png?:size=500,500&a=1&b=2&:refresh=true\"></img></div><br/>";
+        assertEquals(result, expect);
+    }
+
 }
