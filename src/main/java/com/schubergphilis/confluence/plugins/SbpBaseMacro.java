@@ -29,10 +29,10 @@ import com.atlassian.bandana.BandanaManager;
 import com.atlassian.plugin.webresource.WebResourceManager;
 import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.macro.MacroException;
-import com.schubergphilis.confluence.configuration.ConfigurationManager;
 import com.schubergphilis.confluence.exceptions.AuthenticationException;
 import com.schubergphilis.confluence.exceptions.ValidationException;
 import org.apache.log4j.Logger;
+
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -40,9 +40,9 @@ import java.util.Map;
 
 public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseMacro
 {
-    protected WebResourceManager webResourceManager;
-    protected ConfigurationManager configManager;
-    protected BandanaManager bandanaManager;
+    protected WebResourceManager _webResourceManager;
+    protected BandanaManager _bandanaManager;
+
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
     public SbpBaseMacro()
@@ -87,7 +87,7 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
         includeResources();
         try
         {
-            return RenderPlugin(params, body, renderContext);
+            return RenderPlugin(params, renderContext);
         }
         catch (ValidationException e)
         {
@@ -107,5 +107,5 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
     }
 
     abstract void includeResources();
-    abstract String RenderPlugin(Map params, String body, RenderContext renderContext) throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException;
+    abstract String RenderPlugin(Map params,RenderContext renderContext) throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException;
 }

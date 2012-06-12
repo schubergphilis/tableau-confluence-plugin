@@ -1,6 +1,8 @@
 ############################## 06/04/2012 v0.7 ###############################
 - added the option to refresh a view ( this will invalidate the cached png )
 - added the tableau icon
+- added option to add a domain to the username
+- extra unit tests for the macro
 
 ############################## 03/06/2012 v0.63 ###############################
 - bugfix: ampersant missing when using parameters in interactive mode

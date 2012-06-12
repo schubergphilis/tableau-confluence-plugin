@@ -46,8 +46,8 @@ public class TableauMacro extends SbpBaseMacro
 {
     public TableauMacro(WebResourceManager webResourceManager, BandanaManager bandanaManager)
     {
-        super.webResourceManager = webResourceManager;
-        super.bandanaManager = bandanaManager;
+        super._webResourceManager = webResourceManager;
+        super._bandanaManager = bandanaManager;
     }
 
     public boolean hasBody()
@@ -60,7 +60,7 @@ public class TableauMacro extends SbpBaseMacro
         return RenderMode.NO_RENDER;
     }
 
-    public String RenderPlugin(Map params, String body, RenderContext renderContext)
+    public String RenderPlugin(Map params, RenderContext renderContext)
             throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException
     {
         String workbook = getStrParameter(params, "workbook");
@@ -79,8 +79,7 @@ public class TableauMacro extends SbpBaseMacro
         String parameters = getStrParameter(params, "parameters", "");
         Boolean refresh = getBoolParameter(params, "refresh", false);
 
-        configManager = new ConfigurationManager(bandanaManager);
-        String host = configManager.getValue(environment, DefaultValueBehaviour.firstInList);
+        String host = getConfigurationManager().getValue(environment, DefaultValueBehaviour.firstInList);
 
         Boolean isExport = isPdfOrWordOutput(renderContext);
 
@@ -91,19 +90,20 @@ public class TableauMacro extends SbpBaseMacro
         if(RenderContext.PREVIEW.equals(renderContext.getOutputType()) && ( workbook.length() == 0 || report.length() == 0))
             return "Please enter a workbook and a report and hit the refresh button.";
 
-        TableauRenderer renderer = new TableauRenderer()
-                .WithSize(width, height)
-                .WithReport(report)
-                .WithWorkbook(workbook)
-                .WithTitle(title)
-                .WithInteractiveStart(interactive)
-                .WithEmbed(embed)
-                .WithToolbar(toolbar)
-                .WithBorderStyle(borderStyle)
-                .WithInteractiveButton(button)
-                .WithExportContext(isExport)
-                .WithTabs(tabs)
-                .WithParameters(parameters);
+        TableauRenderer renderer = getTableauRenderer()
+            .WithSize(width, height)
+            .WithReport(report)
+            .WithWorkbook(workbook)
+            .WithTitle(title)
+            .WithInteractiveStart(interactive)
+            .WithEmbed(embed)
+            .WithToolbar(toolbar)
+            .WithBorderStyle(borderStyle)
+            .WithInteractiveButton(button)
+            .WithExportContext(isExport)
+            .WithTabs(tabs)
+            .WithRefresh(refresh)
+            .WithParameters(parameters);
 
         DetermineHost(host, renderer);
 
@@ -112,14 +112,20 @@ public class TableauMacro extends SbpBaseMacro
 
     private void DetermineHost(String host, TableauRenderer renderer) throws IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, ValidationException
     {
-        String username = AuthenticatedUserThreadLocal.getUsername();
+        String domain = getConfigurationManager().getValue("domain");
+        String username = getUsername();
+
+        if(domain != null && domain.length() > 0)
+        {
+            username = String.format("%s\\%s", domain, username);
+        }
 
         // for debugging purposes, override the confluence username
-        String debugusername = configManager.getValue("debugusername");
+        String debugusername = getConfigurationManager().getValue("debugusername");
         if(debugusername != null && debugusername.length() > 0)
             username = debugusername;
 
-        String trustedHost = new TrustedAuthentication(new HttpRequest())
+        String trustedHost = getTrustedAuthentication()
                 .WithTableauUrl(host)
                 .WithUsername(username)
                 .Authenticate();
@@ -135,6 +141,59 @@ public class TableauMacro extends SbpBaseMacro
     void includeResources()
     {
         String resource = "com.schubergphilis.confluence.plugins.tableau-plugin:javascript-resources";
-        webResourceManager.requireResource(resource);
+        _webResourceManager.requireResource(resource);
+    }
+
+    private TableauRenderer _tableauRenderer;
+    private TableauRenderer getTableauRenderer()
+    {
+        if(_tableauRenderer == null)
+            _tableauRenderer = new TableauRenderer();
+
+        return _tableauRenderer;
+    }
+    public void setTableauRenderer(TableauRenderer tableauRenderer)
+    {
+        _tableauRenderer = tableauRenderer;
+    }
+
+    private TrustedAuthentication _trustedAuthentication;
+    private TrustedAuthentication getTrustedAuthentication()
+    {
+        if(_trustedAuthentication==null)
+            _trustedAuthentication = new TrustedAuthentication(new HttpRequest());
+
+        return _trustedAuthentication;
+    }
+
+    public void setTrustedAuthentication(TrustedAuthentication authentication)
+    {
+        _trustedAuthentication = authentication;
+    }
+
+    private ConfigurationManager _configurationManager;
+    private ConfigurationManager getConfigurationManager()
+    {
+        if(_configurationManager == null)
+            _configurationManager = new ConfigurationManager(_bandanaManager);
+
+        return _configurationManager;
+    }
+    public void setConfigurationManager(ConfigurationManager configurationManager)
+    {
+        _configurationManager = configurationManager;
+    }
+
+    private String _username;
+    private String getUsername()
+    {
+        if(_username == null)
+            _username = AuthenticatedUserThreadLocal.getUsername();
+
+        return _username;
+    }
+    public void setUsername(String username)
+    {
+        _username = username;
     }
 }
