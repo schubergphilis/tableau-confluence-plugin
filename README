@@ -68,7 +68,7 @@ Configuration of plugin
  
  There is one special entry for debugging purposes, and that is the key 'debugusername', with this entry you can override the username that is used for trusted authentication.
  
- If tableau requires a domain to authenticate the user, you can configure it with the key 'domain', for instance 'mydomain.local'.
+ If your tableau instance requires a domain to authenticate you users, you can configure it with the key 'domain', for instance 'mydomain.local'.
  
 Embed tableau reports in confluence
 
