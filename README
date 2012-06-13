@@ -68,6 +68,8 @@ Configuration of plugin
  
  There is one special entry for debugging purposes, and that is the key 'debugusername', with this entry you can override the username that is used for trusted authentication.
  
+ If tableau requires a domain to authenticate the user, you can configure it with the key 'domain', for instance 'mydomain.local'.
+ 
 Embed tableau reports in confluence
 
 	Possible parameters:
@@ -87,6 +89,7 @@ Embed tableau reports in confluence
 	button 		false 			option to add a button 'Interactive view' to the non interactive (png) view and open the interactive view in a window
 	noprint 	false 			when setting this option to true, this report will be skipped when printing / exporting to pdf or word 
 	parameters					send extra parameters to the report
+	refresh		false			refresh will invalidate the tableau cached png 
 	
 	Basically there are two modes
 		* image view, a plain png type of image
