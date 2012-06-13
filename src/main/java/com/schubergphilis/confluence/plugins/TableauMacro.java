@@ -148,7 +148,7 @@ public class TableauMacro extends SbpBaseMacro
     private TableauRenderer getTableauRenderer()
     {
         if(_tableauRenderer == null)
-            _tableauRenderer = new TableauRenderer();
+            return new TableauRenderer();
 
         return _tableauRenderer;
     }
@@ -160,7 +160,7 @@ public class TableauMacro extends SbpBaseMacro
     private TrustedAuthentication _trustedAuthentication;
     private TrustedAuthentication getTrustedAuthentication()
     {
-        if(_trustedAuthentication==null)
+        if(_trustedAuthentication == null)
             _trustedAuthentication = new TrustedAuthentication(new HttpRequest());
 
         return _trustedAuthentication;

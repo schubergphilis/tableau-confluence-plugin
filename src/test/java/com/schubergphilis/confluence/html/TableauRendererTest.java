@@ -396,5 +396,4 @@ public class TableauRendererTest {
         String expect = "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/ExampleWorkbook/view1.png?:size=500,500&a=1&b=2&:refresh=true\"></img></div><br/>";
         assertEquals(result, expect);
     }
-
 }
