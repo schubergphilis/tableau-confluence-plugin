@@ -77,9 +77,10 @@ public class TableauMacroTest {
 
     private String _confluenceUsername = "admin";
     private String _expectedUsername = "admin";
+    private String _expectedSite = "";
 
     @Before
-    public void SetupTest()
+    public void setupTest()
     {
         _defaultParameters = getDefaultParameters();
         _renderContext = new RenderContext();
@@ -98,7 +99,7 @@ public class TableauMacroTest {
     }
 
     @After
-    public void TearDown()
+    public void tearDown()
     {
         verify(_mockResourceManager).requireResource("com.schubergphilis.confluence.plugins.tableau-plugin:javascript-resources");
     }
@@ -111,26 +112,27 @@ public class TableauMacroTest {
         when(_mockConfigurationManager.getValue("prod", DefaultValueBehaviour.firstInList)).thenReturn("http://localhost");
 
         // expects for trusted authentication
-        when(_mockTrustedAuthentication.WithTableauUrl("http://localhost")).thenReturn(_mockTrustedAuthentication);
-        when(_mockTrustedAuthentication.WithUsername(_expectedUsername)).thenReturn(_mockTrustedAuthentication);
-        when(_mockTrustedAuthentication.Authenticate()).thenReturn("http://localhost/trusted/123456789");
+        when(_mockTrustedAuthentication.withTableauUrl("http://localhost")).thenReturn(_mockTrustedAuthentication);
+        when(_mockTrustedAuthentication.withUsername(_expectedUsername)).thenReturn(_mockTrustedAuthentication);
+        when(_mockTrustedAuthentication.withSite(_expectedSite)).thenReturn(_mockTrustedAuthentication);
+        when(_mockTrustedAuthentication.authenticate()).thenReturn("http://localhost/trusted/123456789");
 
         // expects for renderer
-        when(_mockTableauRenderer.WithSize(_width,_height)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithReport(_report)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithWorkbook(_workbook)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithTitle(_title)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithInteractiveStart(_interactive)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithEmbed(_embed)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithToolbar(_toolbar)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithBorderStyle(_borderStyle)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithInteractiveButton(_showInteractiveButton)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithExportContext(_exportContext)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithTabs(_tabs)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithRefresh(_refresh)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithParameters(_parameters)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.WithHost(_host, _trustedHost)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.Render()).thenReturn("ok");
+        when(_mockTableauRenderer.withSize(_width, _height)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withReport(_report)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withWorkbook(_workbook)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withTitle(_title)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withInteractiveStart(_interactive)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withEmbed(_embed)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withToolbar(_toolbar)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withBorderStyle(_borderStyle)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withInteractiveButton(_showInteractiveButton)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withExportContext(_exportContext)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withTabs(_tabs)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withRefresh(_refresh)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withParameters(_parameters)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withHost(_host, _trustedHost)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.render()).thenReturn("ok");
     }
 
     private Map<String,String> getDefaultParameters()
@@ -155,7 +157,7 @@ public class TableauMacroTest {
         return result;
     }
     @Test
-    public void RenderMacroTest_Should_Read_from_ConfigurationManager_Should_Use_Trusted_Auth_And_Call_TableauRenderer() throws MacroException, IOException, ValidationException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException {
+    public void renderMacroTest_Should_Read_from_ConfigurationManager_Should_Use_Trusted_Auth_And_Call_TableauRenderer() throws MacroException, IOException, ValidationException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException {
 
         // arrange
         setDefaultExpects();
@@ -168,7 +170,7 @@ public class TableauMacroTest {
     }
 
     @Test
-    public void RenderMacro_Should_Append_Domain_To_Username_If_Configured() throws ValidationException, IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, MacroException {
+    public void renderMacro_Should_Append_Domain_To_Username_If_Configured() throws ValidationException, IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, MacroException {
 
         // arrange
         _confluenceUsername = "admin";
@@ -185,7 +187,7 @@ public class TableauMacroTest {
     }
 
     @Test
-    public void RenderMacro_Should_Use_debugusername_When_Configured() throws IOException, ValidationException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, MacroException {
+    public void renderMacro_Should_Use_debugusername_When_Configured() throws IOException, ValidationException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, MacroException {
         // arrange
         _expectedUsername = "testuser";
         when(_mockConfigurationManager.getValue("debugusername")).thenReturn("testuser");
@@ -196,5 +198,20 @@ public class TableauMacroTest {
 
         // assert
         Assert.assertEquals(result, "ok");
+    }
+
+    @Test
+    public void renderMacro_Should_Provide_Site_When_Provided() throws IOException, NoSuchAlgorithmException, AuthenticationException, KeyManagementException, ValidationException, MacroException {
+        // arrange
+        _expectedSite = "site";
+        setDefaultExpects();
+        _defaultParameters.put("site", "site");
+
+        // act
+        String result = _tableauMacro.execute(_defaultParameters, "", _renderContext);
+
+        // assert
+        Assert.assertEquals(result, "ok");
+        verify(_mockTrustedAuthentication).withSite("site");
     }
 }

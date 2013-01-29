@@ -60,7 +60,7 @@ public class TableauMacro extends SbpBaseMacro
         return RenderMode.NO_RENDER;
     }
 
-    public String RenderPlugin(Map params, RenderContext renderContext)
+    public String renderPlugin(Map params, RenderContext renderContext)
             throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException
     {
         String workbook = getStrParameter(params, "workbook");
@@ -78,6 +78,7 @@ public class TableauMacro extends SbpBaseMacro
         Boolean noPrint = getBoolParameter(params, "noprint", false);
         String parameters = getStrParameter(params, "parameters", "");
         Boolean refresh = getBoolParameter(params, "refresh", false);
+        String site = getStrParameter(params, "site","");
 
         String host = getConfigurationManager().getValue(environment, DefaultValueBehaviour.firstInList);
 
@@ -91,26 +92,27 @@ public class TableauMacro extends SbpBaseMacro
             return "Please enter a workbook and a report and hit the refresh button.";
 
         TableauRenderer renderer = getTableauRenderer()
-            .WithSize(width, height)
-            .WithReport(report)
-            .WithWorkbook(workbook)
-            .WithTitle(title)
-            .WithInteractiveStart(interactive)
-            .WithEmbed(embed)
-            .WithToolbar(toolbar)
-            .WithBorderStyle(borderStyle)
-            .WithInteractiveButton(button)
-            .WithExportContext(isExport)
-            .WithTabs(tabs)
-            .WithRefresh(refresh)
-            .WithParameters(parameters);
+            .withSize(width, height)
+            .withReport(report)
+            .withWorkbook(workbook)
+            .withTitle(title)
+            .withInteractiveStart(interactive)
+            .withEmbed(embed)
+            .withToolbar(toolbar)
+            .withBorderStyle(borderStyle)
+            .withInteractiveButton(button)
+            .withExportContext(isExport)
+            .withTabs(tabs)
+            .withRefresh(refresh)
+            .withSite(site)
+            .withParameters(parameters);
 
-        DetermineHost(host, renderer);
+        determineHost(host, site, renderer);
 
-        return renderer.Render();
+        return renderer.render();
     }
 
-    private void DetermineHost(String host, TableauRenderer renderer) throws IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, ValidationException
+    private void determineHost(String host, String site, TableauRenderer renderer) throws IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, ValidationException
     {
         String domain = getConfigurationManager().getValue("domain");
         String username = getUsername();
@@ -126,11 +128,12 @@ public class TableauMacro extends SbpBaseMacro
             username = debugusername;
 
         String trustedHost = getTrustedAuthentication()
-                .WithTableauUrl(host)
-                .WithUsername(username)
-                .Authenticate();
+                .withTableauUrl(host)
+                .withUsername(username)
+                .withSite(site)
+                .authenticate();
 
-        renderer.WithHost(host, trustedHost);
+        renderer.withHost(host, trustedHost);
     }
 
     private boolean isPdfOrWordOutput(RenderContext context)
@@ -152,6 +155,7 @@ public class TableauMacro extends SbpBaseMacro
 
         return _tableauRenderer;
     }
+
     public void setTableauRenderer(TableauRenderer tableauRenderer)
     {
         _tableauRenderer = tableauRenderer;
@@ -161,7 +165,7 @@ public class TableauMacro extends SbpBaseMacro
     private TrustedAuthentication getTrustedAuthentication()
     {
         if(_trustedAuthentication == null)
-            _trustedAuthentication = new TrustedAuthentication(new HttpRequest());
+            return new TrustedAuthentication(new HttpRequest());
 
         return _trustedAuthentication;
     }
@@ -175,10 +179,11 @@ public class TableauMacro extends SbpBaseMacro
     private ConfigurationManager getConfigurationManager()
     {
         if(_configurationManager == null)
-            _configurationManager = new ConfigurationManager(_bandanaManager);
+            return new ConfigurationManager(_bandanaManager);
 
         return _configurationManager;
     }
+
     public void setConfigurationManager(ConfigurationManager configurationManager)
     {
         _configurationManager = configurationManager;
@@ -188,10 +193,11 @@ public class TableauMacro extends SbpBaseMacro
     private String getUsername()
     {
         if(_username == null)
-            _username = AuthenticatedUserThreadLocal.getUsername();
+            return AuthenticatedUserThreadLocal.getUsername();
 
         return _username;
     }
+
     public void setUsername(String username)
     {
         _username = username;

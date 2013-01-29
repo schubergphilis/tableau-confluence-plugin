@@ -45,13 +45,13 @@ public class HttpRequest
 
     }
 
-    public HttpRequest WithUrl(String url)
+    public HttpRequest withUrl(String url)
     {
         _url = url;
         return this;
     }
 
-    public HttpRequest WithPostParam(String name, String value)
+    public HttpRequest withPostParam(String name, String value)
     {
         _postParameters.put(name, value);
         return this;
@@ -75,7 +75,7 @@ public class HttpRequest
         return data.toString();
     }
 
-    public String Post() throws IOException, NoSuchAlgorithmException, KeyManagementException {
+    public String post() throws IOException, NoSuchAlgorithmException, KeyManagementException {
 
         // Create the request
         OutputStreamWriter writer = null;

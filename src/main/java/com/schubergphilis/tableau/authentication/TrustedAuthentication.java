@@ -36,31 +36,41 @@ public class TrustedAuthentication
     private String _username;
     private final HttpRequest _httpRequest;
     private String _tableauUrl;
+    private String _site;
 
     public TrustedAuthentication(HttpRequest httpRequest)
     {
         _httpRequest = httpRequest;
     }
 
-    public TrustedAuthentication WithUsername(String username)
+    public TrustedAuthentication withUsername(String username)
     {
         _username = username;
         return this;
     }
 
-    public TrustedAuthentication WithTableauUrl(String url)
+    public TrustedAuthentication withTableauUrl(String url)
     {
         _tableauUrl = url;
         return this;
     }
+    
+    public TrustedAuthentication withSite(String site) {
+    	_site = site;
+    	return this;
+    }
 
-    public String Authenticate() throws AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException
+    public String authenticate() throws AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException
     {
         // do post to tableau server, with username
-        String unique_id = _httpRequest
-                                    .WithUrl(_tableauUrl)
-                                    .WithPostParam("username", _username)
-                                    .Post();
+        _httpRequest.withUrl(_tableauUrl)
+                    .withPostParam("username", _username);
+
+        // optional post site to use
+        if(_site != null && _site.length() > 0)
+        	_httpRequest.withPostParam("target_site", _site);
+        
+        String unique_id = _httpRequest.post();
 
         if(unique_id != null && unique_id.equals("-1"))
         {

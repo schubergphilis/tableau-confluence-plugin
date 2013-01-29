@@ -87,7 +87,7 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
         includeResources();
         try
         {
-            return RenderPlugin(params, renderContext);
+            return renderPlugin(params, renderContext);
         }
         catch (ValidationException e)
         {
@@ -107,5 +107,5 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
     }
 
     abstract void includeResources();
-    abstract String RenderPlugin(Map params,RenderContext renderContext) throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException;
+    abstract String renderPlugin(Map params, RenderContext renderContext) throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException;
 }

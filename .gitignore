@@ -1,5 +1,7 @@
-
 target
 *.ipr
 *.iws
 *.iml
+.idea/
+.project
+.settings/

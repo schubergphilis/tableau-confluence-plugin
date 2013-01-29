@@ -46,6 +46,7 @@ public class TableauRenderer extends BaseHtmlRenderer
     private Boolean _isExportContext = false;
     private String _parameters = "";
     private Boolean _renderParameters = false;
+    private String _site;
 
     private Map<String, String> _urlParameters = new HashMap<String, String>();
 
@@ -54,32 +55,32 @@ public class TableauRenderer extends BaseHtmlRenderer
 
     }
 
-    public TableauRenderer WithWorkbook(String workbook)
+    public TableauRenderer withWorkbook(String workbook)
     {
         _workbook = workbook.replace(" ", "");
         return this;
     }
 
-    public TableauRenderer WithTitle(String title)
+    public TableauRenderer withTitle(String title)
     {
         _title = title;
         return this;
     }
 
-    public TableauRenderer WithHost(String host, String trustedHost)
+    public TableauRenderer withHost(String host, String trustedHost)
     {
         _host = host;
         _trustedHost = trustedHost;
         return this;
     }
 
-    public TableauRenderer WithReport(String report)
+    public TableauRenderer withReport(String report)
     {
         _report = report.replace(" ", "");
         return this;
     }
 
-    public TableauRenderer WithSize(Integer width, Integer height)
+    public TableauRenderer withSize(Integer width, Integer height)
     {
         if(width != null && height != null)
         {
@@ -91,49 +92,49 @@ public class TableauRenderer extends BaseHtmlRenderer
         return this;
     }
 
-    public TableauRenderer WithInteractiveStart(Boolean interactive)
+    public TableauRenderer withInteractiveStart(Boolean interactive)
     {
         _interactive = interactive;
         return this;
     }
 
-    public TableauRenderer WithEmbed(Boolean embed)
+    public TableauRenderer withEmbed(Boolean embed)
     {
         _embed = embed;
         return this;
     }
 
-    public TableauRenderer WithToolbar(Boolean toolbar)
+    public TableauRenderer withToolbar(Boolean toolbar)
     {
         _toolbar = toolbar;
         return this;
     }
 
-    public TableauRenderer WithBorderStyle(String borderStyle)
+    public TableauRenderer withBorderStyle(String borderStyle)
     {
         _borderStyle = borderStyle;
         return this;
     }
 
-    public TableauRenderer WithTabs(Boolean tabs)
+    public TableauRenderer withTabs(Boolean tabs)
     {
         _tabs = tabs;
         return this;
     }
 
-    public TableauRenderer WithInteractiveButton(Boolean showButton)
+    public TableauRenderer withInteractiveButton(Boolean showButton)
     {
         _showInteractiveButton = showButton;
         return this;
     }
 
-    public TableauRenderer WithExportContext(Boolean isExport)
+    public TableauRenderer withExportContext(Boolean isExport)
     {
         _isExportContext = isExport;
         return this;
     }
 
-    public TableauRenderer WithParameters(String parameters)
+    public TableauRenderer withParameters(String parameters)
     {
         if(parameters != null && parameters.length() > 0)
         {
@@ -145,34 +146,44 @@ public class TableauRenderer extends BaseHtmlRenderer
         return this;
     }
 
-    public TableauRenderer WithRefresh(Boolean refresh)
+    public TableauRenderer withRefresh(Boolean refresh)
     {
         if(refresh)
-            _urlParameters.put(":refresh","true");
+            _urlParameters.put(":refresh","yes");
 
         return this;
     }
 
-    private String HtmlAttribute(String name, String value)
+    public TableauRenderer withSite(String site) {
+        _site = site;
+
+        return this;
+    }
+
+    private String htmlAttribute(String name, String value)
     {
         return name + "=\"" + value + "\" ";
     }
 
-    private String TableauAttributes() {
+    private String tableauAttributes() {
         return new StringBuffer()
-            .append(HtmlAttribute("workbook", _workbook))
-            .append(HtmlAttribute("report", _report))
-            .append(HtmlAttribute("tableau_host", _host))
-            .append(HtmlAttribute("title", _title == null ? "" : _title))
-            .append(HtmlAttribute("embed", (_embed ? "yes" : "no")))
-            .append(HtmlAttribute("toolbar", (_toolbar ? "yes" : "no")))
-            .append(HtmlAttribute("tabs", (_tabs ? "yes" : "no")))
-            .append(HtmlAttribute("parameters", _parameters))
+            .append(htmlAttribute("workbook", _workbook))
+            .append(htmlAttribute("report", _report))
+            .append(htmlAttribute("tableau_host", _host))
+            .append(htmlAttribute("title", _title == null ? "" : _title))
+            .append(htmlAttribute("embed", (_embed ? "yes" : "no")))
+            .append(htmlAttribute("toolbar", (_toolbar ? "yes" : "no")))
+            .append(htmlAttribute("tabs", (_tabs ? "yes" : "no")))
+            .append(htmlAttribute("parameters", _parameters))
             .toString();
     }
 
-    private String TableauUrl()  {
-        return _trustedHost.concat("/views/")
+    private String multiSite() {
+        return (_site !=null && _site.length() > 0 ? String.format("/t/%s", _site) : "");
+    }
+    private String tableauUrl() {
+        return _trustedHost.concat(multiSite())
+                    .concat("/views/")
                     .concat(_workbook)
                     .concat("/")
                     .concat(_report);
@@ -186,7 +197,7 @@ public class TableauRenderer extends BaseHtmlRenderer
                 + "\"";
     }
 
-    protected String Validate()
+    protected String validate()
     {
         if(_workbook == null || _workbook.length() == 0)
             return "parameter workbook is missing";
@@ -223,47 +234,47 @@ public class TableauRenderer extends BaseHtmlRenderer
         return result.toString();
     }
 
-    protected String RenderHtml() {
+    protected String renderHtml() {
         if(!_interactive || _isExportContext) {
-            BuildNonInteractiveHtml();
+            buildNonInteractiveHtml();
         }
         else {
-            BuildInteractiveHtml();
+            buildInteractiveHtml();
         }
 
         return _result.toString();
     }
 
-    private void BuildNonInteractiveHtml() {
+    private void buildNonInteractiveHtml() {
         _result.append("<div ")
                 .append(getBorderStyle())
                 .append(">")
                 .append("<img ")
                 .append("src=\"")
-                .append(TableauUrl())
+                .append(tableauUrl())
                 .append(".png")
                 .append(getPngUrlParameters())
                 .append("\"></img>");
 
         if(_showInteractiveButton && !_isExportContext)
         {
-            _result.append("<br/><input type=\"button\" " + TableauAttributes() + " value=\"Open interactive view\" />");
+            _result.append("<br/><input type=\"button\" " + tableauAttributes() + " value=\"Open interactive view\" />");
         }
 
         _result.append("</div><br/>");
     }
 
-    private void BuildInteractiveHtml() {
+    private void buildInteractiveHtml() {
         _result.append("<div " + getBorderStyle() + "><iframe ");
 
         if(_width != null && _height != null)
         {
-            _result.append(HtmlAttribute("width", _width.toString()))
-                   .append(HtmlAttribute("height", _height.toString()));
+            _result.append(htmlAttribute("width", _width.toString()))
+                   .append(htmlAttribute("height", _height.toString()));
         }
 
-        _result.append(HtmlAttribute("frameborder", "0"))
-               .append(HtmlAttribute("src", TableauUrl()
+        _result.append(htmlAttribute("frameborder", "0"))
+               .append(htmlAttribute("src", tableauUrl()
                        .concat("?:embed=")
                        .concat(_embed ? "yes" : "no")
                        .concat("&:toolbar=")
@@ -272,8 +283,8 @@ public class TableauRenderer extends BaseHtmlRenderer
                        .concat(_tabs ? "yes" : "no")
                        .concat(_renderParameters ? "&" : "")
                        .concat(_parameters)))
-               .append(HtmlAttribute("border", "0"))
-               .append(HtmlAttribute("style", "border: 0pt none;"))
+               .append(htmlAttribute("border", "0"))
+               .append(htmlAttribute("style", "border: 0pt none;"))
                .append("></iframe></div><br/>");
     }
 }

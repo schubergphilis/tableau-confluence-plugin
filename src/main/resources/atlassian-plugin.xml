@@ -1,7 +1,7 @@
 <atlassian-plugin key="${project.groupId}.${project.artifactId}" name="Schuberg Philis Tableau plugin" plugins-version="2">
     <plugin-info>
         <description>Tableau plugin for confluence</description>
-        <version>0.7</version>
+        <version>0.8</version>
         <vendor name="Schuberg Philis" url="http://www.schubergphilis.com" />
         <param name="configure.url">/admin/plugins/tableau-plugin/configure.action</param>
     </plugin-info>
@@ -40,6 +40,7 @@
             <parameter name="noprint" type="boolean" default="false"/>
             <parameter name="refresh" type="boolean" default="false"/>
             <parameter name="parameters" type="string" default=""/>
+            <parameter name="site" type="string" default="" />
         </parameters>
     </macro>
 

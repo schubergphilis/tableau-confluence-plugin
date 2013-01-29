@@ -28,17 +28,17 @@ import com.schubergphilis.confluence.exceptions.ValidationException;
 
 public abstract class BaseHtmlRenderer
 {
-    abstract String Validate();
-    abstract String RenderHtml();
+    abstract String validate();
+    abstract String renderHtml();
 
-    public final String Render() throws ValidationException {
-        String validationResult = Validate();
+    public final String render() throws ValidationException {
+        String validationResult = validate();
 
         if(validationResult != null)
         {
             throw new ValidationException(validationResult);
         }
 
-        return RenderHtml();
+        return renderHtml();
     }
 }
