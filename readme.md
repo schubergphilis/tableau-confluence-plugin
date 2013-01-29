@@ -83,6 +83,7 @@ If your tableau instance requires a domain to authenticate you users, you can co
 ## Embed tableau reports in confluence
 
 Possible parameters:
+
 | Parameter   | Default value | Description                           |
 | ----------- | ------------- | ------------------------------------- |
 | title       |               | name of report, this title is shown when opening the full page interactive view from the 'interactive button' |
