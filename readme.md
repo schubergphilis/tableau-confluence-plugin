@@ -12,20 +12,32 @@ In our situation we use a plugin to export reports on confluence pages, so confl
 To enable both features alter the file with filename: httpd.conf.templ
 
 Tableau 6.x
-    1. Open the template file:
-        C:\Program Files (x86)\Tableau Server\6.0\templates
-    2. Search for entry:
-        <Location ~ "^/(?!manual|auth).*">
-    3. Add 'trusted' to the regular expression:
-        <Location ~ "^/(?!manual|auth|trusted).*">
+
+1. Open the template file:
+
+    C:\Program Files (x86)\Tableau Server\6.0\templates
+
+2. Search for entry:
+
+    <Location ~ "^/(?!manual|auth).*">
+
+3. Add 'trusted' to the regular expression:
+
+    <Location ~ "^/(?!manual|auth|trusted).*">
 
 Tableau 7.x
-    1. Open the template file:
-        C:\Program Files (x86)\Tableau Server\7.0\templates
-    2. Search for the entry:
-        <Location ~ "^/(?!(t/[^/]*/)?(manual|auth|dataserver)).*">
-    3. Add 'trusted' and 'vizql/trusted' to the regular expression:
-        <Location ~ "^/(?!(t/[^/]*/)?(manual|auth|trusted|vizql/trusted|dataserver)).*">
+
+1. Open the template file:
+
+    C:\Program Files (x86)\Tableau Server\7.0\templates
+
+2. Search for the entry:
+
+    <Location ~ "^/(?!(t/[^/]*/)?(manual|auth|dataserver)).*">
+
+3. Add 'trusted' and 'vizql/trusted' to the regular expression:
+
+    <Location ~ "^/(?!(t/[^/]*/)?(manual|auth|trusted|vizql/trusted|dataserver)).*">
 
 ### Disable client ip checking
 Run following tabadmin commands:
@@ -71,24 +83,23 @@ If your tableau instance requires a domain to authenticate you users, you can co
 ## Embed tableau reports in confluence
 
 Possible parameters:
-
-Parameter	Default value	Description
-title 						name of report, this title is shown when opening the full page interactive view from the 'interactive button'
-workbook 	  				workbook name on the Tableau server (case sensitive)
-report 	  					report name in the workbook (case sensitive)
-height 		550 			height in number of pixels
-width 		1280 			width in number of pixels
-environment prod 			option to point to other environment configured in section 'Configuration of plugin', for example use acc for acceptance environment
-interactive false 			opens sheet in interactive mode
-embed 		true 			embed in page
-toolbar 	true 			show or hide the toolbar
-tabs 		false 			show tabs for all reports within the workbook
-borderstyle 	  			extra css borderstyle properties, like 'border:red 1px solid' or 'background-color:gray'
-button 		false 			option to add a button 'Interactive view' to the non interactive (png) view and open the interactive view in a window
-noprint 	false 			when setting this option to true, this report will be skipped when printing / exporting to pdf or word
-parameters					send extra parameters to the report
-refresh		false			refresh will invalidate the tableau cached png
-site                        to specify the site to use
+|Parameter|Default value|Description|
+|title||name of report, this title is shown when opening the full page interactive view from the 'interactive button'|
+|workbook||workbook name on the Tableau server (case sensitive)|
+|report||report name in the workbook (case sensitive)|
+|height|550|height in number of pixels|
+|width|1280|width in number of pixels|
+|environment|prod|option to point to other environment configured in section 'Configuration of plugin', for example use acc for acceptance environment|
+|interactive|false|opens sheet in interactive mode|
+|embed|true|embed in page|
+|toolbar|true|show or hide the toolbar|
+|tabs|false|show tabs for all reports within the workbook|
+|borderstyle||extra css borderstyle properties, like 'border:red 1px solid' or 'background-color:gray'|
+|button|false|option to add a button 'Interactive view' to the non interactive (png) view and open the interactive view in a window|
+|noprint|false|when setting this option to true, this report will be skipped when printing / exporting to pdf or word|
+|parameters||send extra parameters to the report|
+|refresh|false|refresh will invalidate the tableau cached png|
+|site||to specify the site to use|
 
 Basically there are two modes
 * image view, a plain png type of image
@@ -97,13 +108,17 @@ Basically there are two modes
 Examples:
 
 Basic example:
+
     {tableau-plugin:workbook=TestWorkbook|report=Sheet1}
 
 Set width and height
+
     {tableau-plugin:workbook=TestWorkbook|report=Sheet1|width=1500|height=800}
 
 Open interactive view and point to acceptance environment
+
     {tableau-plugin:workbook=TestWorkbook|report=Sheet1|interactive=true|environment=acc}
 
 Example of using parameters
+
     {tableau-plugin:workbook=TestWorkbook|report=Sheet1|parameters=colour=blue&othervalue=100}
