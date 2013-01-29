@@ -132,6 +132,7 @@ public class TableauMacroTest {
         when(_mockTableauRenderer.withRefresh(_refresh)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withParameters(_parameters)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withHost(_host, _trustedHost)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withSite(_expectedSite)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.render()).thenReturn("ok");
     }
 
