@@ -91,8 +91,7 @@ public class TableauMacro extends SbpBaseMacro
         if(RenderContext.PREVIEW.equals(renderContext.getOutputType()) && ( workbook.length() == 0 || report.length() == 0))
             return "Please enter a workbook and a report and hit the refresh button.";
 
-        TableauRenderer renderer = getTableauRenderer()   ;
-        renderer
+        TableauRenderer renderer = getTableauRenderer()
             .withSize(width, height)
             .withReport(report)
             .withWorkbook(workbook)
