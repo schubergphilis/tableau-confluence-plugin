@@ -49,14 +49,15 @@ Note tabadmin can be found here: "C:\Program Files (x86)\Tableau\Tableau Server\
 
 ### Whitelist your confluence server(s)
 Run following tabadmin commands:
-    tabadmin set wgtrusted_hosts "192.168.1.1, 192.168.1.2" (where 192.168.1.x are your confluence hosts)
+
+    tabadmin set wgserver.trusted_hosts "192.168.1.1, 192.168.1.2" (where 192.168.1.x are your confluence hosts)
     tabadmin configure
     tabadmin restart
 
-	The comma separated list of ip addresses should be within double quotes with a space after each comma.
+The comma separated list of ip addresses should be within double quotes with a space after each comma.
 
-	For more information see the tableau server admin reference (page 224 / 225 / 229):
-	http://downloads.tableausoftware.com/quickstart/server-guides/en-us/server_admin7.0.pdf
+For more information see the tableau server admin reference (page 224 / 225 / 229):
+http://downloads.tableausoftware.com/quickstart/server-guides/en-us/server_admin7.0.pdf
 
 ## Installation of plugin
 * Get the jar
