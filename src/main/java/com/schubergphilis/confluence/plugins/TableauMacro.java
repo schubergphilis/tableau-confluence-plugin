@@ -89,7 +89,7 @@ public class TableauMacro extends SbpBaseMacro
             return "";
 
         if(RenderContext.PREVIEW.equals(renderContext.getOutputType()) && ( workbook.length() == 0 || report.length() == 0))
-            return "Please enter a workbook and a report and hit the refresh button.";
+            return "Please provide a workbook and a report and hit the refresh button.";
 
         TableauRenderer renderer = getTableauRenderer()
             .withSize(width, height)
@@ -141,6 +141,7 @@ public class TableauMacro extends SbpBaseMacro
         return RenderContext.PDF.equals(context.getOutputType()) || RenderContext.WORD.equals(context.getOutputType());
     }
 
+    @Override
     void includeResources()
     {
         String resource = "com.schubergphilis.confluence.plugins.tableau-plugin:javascript-resources";

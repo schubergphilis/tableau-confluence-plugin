@@ -22,7 +22,7 @@
         </package>
     </xwork>
 
-    <macro name="tableau-plugin" class="com.schubergphilis.confluence.plugins.TableauMacro" key="tableau-plugin" icon="/download/resources/${project.groupId}.${project.artifactId}:javascript-resources/tableau.png">
+    <macro name="tableau-plugin" class="com.schubergphilis.confluence.plugins.TableauMacro" key="tableau-plugin" icon="/download/resources/${project.artifactId}:javascript-resources/tableau.png">
         <description>This macros embeds a tableau view</description>
         <parameters>
             <parameter name="title" type="string"/>
