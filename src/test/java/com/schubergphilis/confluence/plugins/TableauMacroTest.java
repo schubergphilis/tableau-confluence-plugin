@@ -59,7 +59,7 @@ public class TableauMacroTest {
     RenderContext _renderContext;
 
     private String _host = "http://localhost";
-    private String _trustedHost = "http://localhost/trusted/123456789";
+    private String _ticket = "123456789";
     private String _title = "view1";
     private String _workbook = "Workbook";
     private String _report = "view1";
@@ -101,7 +101,7 @@ public class TableauMacroTest {
     @After
     public void tearDown()
     {
-        verify(_mockResourceManager).requireResource("com.schubergphilis.confluence.plugins.tableau-plugin:javascript-resources");
+        verify(_mockResourceManager).requireResource("tableau-plugin:javascript-resources");
     }
 
     private void setDefaultExpects() throws ValidationException, IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException {
@@ -110,6 +110,7 @@ public class TableauMacroTest {
 
         // expects for configuration manager
         when(_mockConfigurationManager.getValue("prod", DefaultValueBehaviour.firstInList)).thenReturn("http://localhost");
+        when(_mockConfigurationManager.getValue("disableclienttrustedauth", "false")).thenReturn("false");
 
         // expects for trusted authentication
         when(_mockTrustedAuthentication.withTableauUrl("http://localhost")).thenReturn(_mockTrustedAuthentication);
@@ -131,7 +132,7 @@ public class TableauMacroTest {
         when(_mockTableauRenderer.withTabs(_tabs)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withRefresh(_refresh)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withParameters(_parameters)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.withHost(_host, _trustedHost)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withHost(_host, _ticket)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withSite(_expectedSite)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.render()).thenReturn("ok");
     }
@@ -214,5 +215,38 @@ public class TableauMacroTest {
         // assert
         Assert.assertEquals(result, "ok");
         verify(_mockTrustedAuthentication).withSite("site");
+    }
+
+    @Test
+    public void renderMacro_Should_Use_internal_url_for_authentication_when_provided() throws IOException, NoSuchAlgorithmException, AuthenticationException, KeyManagementException, ValidationException, MacroException {
+        // arrange
+        setDefaultExpects();
+
+        // mock
+        when(_mockTrustedAuthentication.withTableauUrl("http://localhost-int")).thenReturn(_mockTrustedAuthentication);
+        when(_mockConfigurationManager.getValue("prod-internal")).thenReturn("http://localhost-int");
+
+        // act
+        String result = _tableauMacro.execute(_defaultParameters, "", _renderContext);
+
+        // assert
+        Assert.assertEquals(result, "ok");
+        verify(_mockTrustedAuthentication).withTableauUrl("http://localhost-int");
+    }
+
+    @Test
+    public void renderMacro_Should_Use_Url_For_Environment_When_Internal_Address_Not_Configured() throws ValidationException, KeyManagementException, NoSuchAlgorithmException, AuthenticationException, IOException, MacroException {
+        // arrange
+        setDefaultExpects();
+
+        // mock
+        when(_mockConfigurationManager.getValue("prod-internal")).thenReturn(null);
+
+        // act
+        String result = _tableauMacro.execute(_defaultParameters, "", _renderContext);
+
+        // assert
+        Assert.assertEquals(result, "ok");
+        verify(_mockTrustedAuthentication).withTableauUrl("http://localhost");
     }
 }

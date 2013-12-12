@@ -67,10 +67,17 @@ public class TableauRenderer extends BaseHtmlRenderer
         return this;
     }
 
-    public TableauRenderer withHost(String host, String trustedHost)
+    public TableauRenderer withHost(String host, String ticket)
     {
         _host = host;
-        _trustedHost = trustedHost;
+
+        if(ticket != null) {
+            _trustedHost = _host + "/trusted/" + ticket;
+        }
+        else {
+            _trustedHost = _host;
+        }
+
         return this;
     }
 

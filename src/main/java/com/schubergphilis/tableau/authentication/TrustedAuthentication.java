@@ -63,7 +63,7 @@ public class TrustedAuthentication
     public String authenticate() throws AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException
     {
         // do post to tableau server, with username
-        _httpRequest.withUrl(_tableauUrl)
+        _httpRequest.withUrl(_tableauUrl + "/trusted")
                     .withPostParam("username", _username);
 
         // optional post site to use
@@ -77,10 +77,6 @@ public class TrustedAuthentication
             throw new AuthenticationException("authentication failed for user: " + _username);
         }
 
-        // construct url with unique_id > http://server/trusted/unique_id
-        String url = _tableauUrl + "/trusted/" + unique_id;
-
-        // return url
-        return url;
+        return unique_id;
     }
 }

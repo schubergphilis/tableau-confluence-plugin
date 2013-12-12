@@ -66,7 +66,7 @@ public class TableauMacro extends SbpBaseMacro
         String workbook = getStrParameter(params, "workbook");
         String report = getStrParameter(params, "report");
         String title = getStrParameter(params, "title", report);
-        String environment = getStrParameter(params, "environment");
+        String environment = getStrParameter(params, "environment", "prod");
         String borderStyle = getStrParameter(params, "borderstyle", "");
         Integer height = getIntParameter(params, "height", 550);
         Integer width = getIntParameter(params, "width", 1280);
@@ -80,12 +80,15 @@ public class TableauMacro extends SbpBaseMacro
         Boolean refresh = getBoolParameter(params, "refresh", false);
         String site = getStrParameter(params, "site","");
 
-        String host = getConfigurationManager().getValue(environment, DefaultValueBehaviour.firstInList);
+        String externalHost = getConfigurationManager().getValue(environment, DefaultValueBehaviour.firstInList);
+        String internalHost = getConfigurationManager().getValue(environment + "-internal");
+        String disableClientTrustedAuthValue = getConfigurationManager().getValue("disableclienttrustedauth", "false");
+        boolean disableClientTrustedAuth = disableClientTrustedAuthValue.toLowerCase().startsWith("t");
 
-        Boolean isExport = isPdfOrWordOutput(renderContext);
+        Boolean isExportContext = isPdfOrWordOutput(renderContext);
 
         // skip for exporting to pdf/word or preview mode
-        if(isExport && noPrint)
+        if(isExportContext && noPrint)
             return "";
 
         if(RenderContext.PREVIEW.equals(renderContext.getOutputType()) && ( workbook.length() == 0 || report.length() == 0))
@@ -101,18 +104,35 @@ public class TableauMacro extends SbpBaseMacro
             .withToolbar(toolbar)
             .withBorderStyle(borderStyle)
             .withInteractiveButton(button)
-            .withExportContext(isExport)
+            .withExportContext(isExportContext)
             .withTabs(tabs)
             .withRefresh(refresh)
             .withSite(site)
             .withParameters(parameters);
 
-        determineHost(host, site, renderer);
+        determineHost(externalHost, internalHost, isExportContext, disableClientTrustedAuth, site, renderer);
 
         return renderer.render();
     }
 
-    private void determineHost(String host, String site, TableauRenderer renderer) throws IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, ValidationException
+    private String getHostForBackendCommunication(String internalHost, String externalHost) {
+        if(internalHost != null && internalHost.length() > 0){
+             return internalHost;
+        }
+
+        return externalHost;
+    }
+
+    private String getHostForRenderer(String internalHost, String externalHost, boolean isExportContext) {
+        // export should use internal when configured
+        if(isExportContext) {
+            return getHostForBackendCommunication(internalHost, externalHost);
+        }
+        return externalHost;
+    }
+
+    private void determineHost(String externalHost, String internalHost, boolean isExportContext, boolean disableClientTrustedAuth, String site, TableauRenderer renderer)
+            throws IOException, AuthenticationException, NoSuchAlgorithmException, KeyManagementException, ValidationException
     {
         String domain = getConfigurationManager().getValue("domain");
         String username = getUsername();
@@ -123,17 +143,25 @@ public class TableauMacro extends SbpBaseMacro
         }
 
         // for debugging purposes, override the confluence username
-        String debugusername = getConfigurationManager().getValue("debugusername");
-        if(debugusername != null && debugusername.length() > 0)
-            username = debugusername;
+        String debugUsername = getConfigurationManager().getValue("debugusername");
+        if(debugUsername != null && debugUsername.length() > 0)
+            username = debugUsername;
 
-        String trustedHost = getTrustedAuthentication()
-                .withTableauUrl(host)
-                .withUsername(username)
-                .withSite(site)
-                .authenticate();
+        // only use external host for authentication when no internal is set
+        String hostForTrustedAuthentication = getHostForBackendCommunication(internalHost, externalHost);
 
-        renderer.withHost(host, trustedHost);
+        String ticket = null;
+
+        if(!disableClientTrustedAuth || isExportContext) {
+            ticket = getTrustedAuthentication()
+                    .withTableauUrl(hostForTrustedAuthentication)
+                    .withUsername(username)
+                    .withSite(site)
+                    .authenticate();
+        }
+
+        String hostForRenderer = getHostForRenderer(internalHost, externalHost, isExportContext);
+        renderer.withHost(hostForRenderer, ticket);
     }
 
     private boolean isPdfOrWordOutput(RenderContext context)
@@ -144,7 +172,7 @@ public class TableauMacro extends SbpBaseMacro
     @Override
     void includeResources()
     {
-        String resource = "com.schubergphilis.confluence.plugins.tableau-plugin:javascript-resources";
+        String resource = "tableau-plugin:javascript-resources";
         _webResourceManager.requireResource(resource);
     }
 

@@ -81,9 +81,7 @@ public class HttpRequest
         OutputStreamWriter writer = null;
         URLConnection conn = null;
 
-        String _trustedUrl = _url + "/trusted";
-
-        URL url = new URL(_trustedUrl);
+        URL url = new URL(_url);
         conn = url.openConnection();
 
         conn.setDoOutput(true);

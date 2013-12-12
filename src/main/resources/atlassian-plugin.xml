@@ -1,7 +1,7 @@
 <atlassian-plugin key="${project.artifactId}" name="Schuberg Philis Tableau plugin" plugins-version="2">
     <plugin-info>
         <description>Tableau plugin for confluence</description>
-        <version>0.8</version>
+        <version>0.9</version>
         <vendor name="Schuberg Philis" url="http://www.schubergphilis.com" />
         <param name="configure.url">/admin/plugins/tableau-plugin/configure.action</param>
     </plugin-info>
@@ -51,20 +51,21 @@
         <resource type="download" name="chartloader.js" location="js/chartloader.js"/>
         <resource type="download" name="jquery-ui-1.8.13.custom.min.js" location="js/jquery-ui-1.8.13.custom.min.js"/>
         <resource type="download" name="jquery-ui-1.8.13.custom.css" location="redmond/jquery-ui-1.8.13.custom.css"/>
-        <resource type="download" name="ui-bg_flat_0_aaaaaa_40x100.png" location="redmond/images/ui-bg_flat_0_aaaaaa_40x100.png"/>
-        <resource type="download" name="ui-bg_flat_55_fbec88_40x100.png" location="redmond/images/ui-bg_flat_55_fbec88_40x100.png"/>
-        <resource type="download" name="ui-bg_glass_75_d0e5f5_1x400.png" location="redmond/images/ui-bg_glass_75_d0e5f5_1x400.png"/>
-        <resource type="download" name="ui-bg_glass_85_dfeffc_1x400.png" location="redmond/images/ui-bg_glass_85_dfeffc_1x400.png"/>
-        <resource type="download" name="ui-bg_glass_95_fef1ec_1x400.png" location="redmond/images/ui-bg_glass_95_fef1ec_1x400.png"/>
-        <resource type="download" name="ui-bg_gloss-wave_55_5c9ccc_500x100.png" location="redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png"/>
-        <resource type="download" name="ui-bg_inset-hard_100_f5f8f9_1x100.png" location="redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png"/>
-        <resource type="download" name="ui-bg_inset-hard_100_fcfdfd_1x100.png" location="redmond/images/ui-bg_inset-hard_100_fcfdfd_1x100.png"/>
-        <resource type="download" name="ui-icons_2e83ff_256x240.png" location="redmond/images/ui-icons_2e83ff_256x240.png"/>
-        <resource type="download" name="ui-icons_6da8d5_256x240.png" location="redmond/images/ui-icons_6da8d5_256x240.png"/>
-        <resource type="download" name="ui-icons_217bc0_256x240.png" location="redmond/images/ui-icons_217bc0_256x240.png"/>
-        <resource type="download" name="ui-icons_469bdd_256x240.png" location="redmond/images/ui-icons_469bdd_256x240.png"/>
-        <resource type="download" name="ui-icons_cd0a0a_256x240.png" location="redmond/images/ui-icons_cd0a0a_256x240.png"/>
-        <resource type="download" name="ui-icons_d8e7f3_256x240.png" location="redmond/images/ui-icons_d8e7f3_256x240.png"/>
-        <resource type="download" name="ui-icons_f9bd01_256x240.png" location="redmond/images/ui-icons_f9bd01_256x240.png"/>
+        <resource type="download" name="images/ui-bg_flat_0_aaaaaa_40x100.png" location="redmond/images/ui-bg_flat_0_aaaaaa_40x100.png"/>
+        <resource type="download" name="images/ui-bg_flat_55_fbec88_40x100.png" location="redmond/images/ui-bg_flat_55_fbec88_40x100.png"/>
+        <resource type="download" name="images/ui-bg_glass_75_d0e5f5_1x400.png" location="redmond/images/ui-bg_glass_75_d0e5f5_1x400.png"/>
+        <resource type="download" name="images/ui-bg_glass_85_dfeffc_1x400.png" location="redmond/images/ui-bg_glass_85_dfeffc_1x400.png"/>
+        <resource type="download" name="images/ui-bg_glass_95_fef1ec_1x400.png" location="redmond/images/ui-bg_glass_95_fef1ec_1x400.png"/>
+        <resource type="download" name="images/ui-bg_gloss-wave_55_5c9ccc_500x100.png" location="redmond/images/ui-bg_gloss-wave_55_5c9ccc_500x100.png"/>
+        <resource type="download" name="images/ui-bg_inset-hard_100_f5f8f9_1x100.png" location="redmond/images/ui-bg_inset-hard_100_f5f8f9_1x100.png"/>
+        <resource type="download" name="images/ui-bg_inset-hard_100_fcfdfd_1x100.png" location="redmond/images/ui-bg_inset-hard_100_fcfdfd_1x100.png"/>
+        <resource type="download" name="images/ui-icons_2e83ff_256x240.png" location="redmond/images/ui-icons_2e83ff_256x240.png"/>
+        <resource type="download" name="images/ui-icons_6da8d5_256x240.png" location="redmond/images/ui-icons_6da8d5_256x240.png"/>
+        <resource type="download" name="images/ui-icons_217bc0_256x240.png" location="redmond/images/ui-icons_217bc0_256x240.png"/>
+        <resource type="download" name="images/ui-icons_469bdd_256x240.png" location="redmond/images/ui-icons_469bdd_256x240.png"/>
+        <resource type="download" name="images/ui-icons_cd0a0a_256x240.png" location="redmond/images/ui-icons_cd0a0a_256x240.png"/>
+        <resource type="download" name="images/ui-icons_d8e7f3_256x240.png" location="redmond/images/ui-icons_d8e7f3_256x240.png"/>
+        <resource type="download" name="images/ui-icons_f9bd01_256x240.png" location="redmond/images/ui-icons_f9bd01_256x240.png"/>
+        <dependency>confluence.web.resources:jquery</dependency> <!-- depends on jQuery -->
     </web-resource>
 </atlassian-plugin>

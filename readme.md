@@ -77,6 +77,10 @@ Now that you have installed the plugin, configure your tableau hosts
 Use a key, for instance: 'prod' or 'production' and a value 'http://tableauserver' or 'https://tableauserver'
 It's possible to enter multiple hosts, but the first entry is the default entry.
 
+Optionally, you can specify a seperate internal address by adding -internal, for example 'prod-internal': 'http://internaltableau'
+
+Optionally, to disable trusted authentication client side, use the key 'disableclienttrustedauth' and set the value to 'true' trusted authentication is still used for exporting to word/pdf
+
 There is one special entry for debugging purposes, and that is the key 'debugusername', with this entry you can override the username that is used for trusted authentication.
 
 If your tableau instance requires a domain to authenticate you users, you can configure it with the key 'domain', for instance 'mydomain.local'.

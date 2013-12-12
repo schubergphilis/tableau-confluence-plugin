@@ -56,6 +56,12 @@ public class ConfigurationManager
         return getValue(key, DefaultValueBehaviour.nullValue);
     }
 
+    public String getValue(String key, String defaultValue) throws ValidationException {
+        String value = getValue(key, DefaultValueBehaviour.nullValue);
+
+        return value == null ? defaultValue : value;
+    }
+
     public String getValue(String key, DefaultValueBehaviour behaviour) throws ValidationException
     {
         String value = null;

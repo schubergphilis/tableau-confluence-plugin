@@ -1,3 +1,13 @@
+############################## 06/12/2013 v0.9 ###############################
+- added the option to disable trusted authentication (only client side)
+  use the key 'disableclienttrustedauth' : 'true' to use this feature
+- added the option to define an extra internal url for requesting a ticket for
+  authentication, for example if your tableau server is defined as
+  'prod': 'http://tableauserver' you can use the environment key (prod) by
+  adding -internal, for example 'prod-internal' : 'http://tableauinternal'
+- bugfix: the button show interactive view did not work
+- tested with confluence 5.4
+
 ############################## 29/01/2013 v0.8 ###############################
 - Multi-tenant (multi-site) support
 

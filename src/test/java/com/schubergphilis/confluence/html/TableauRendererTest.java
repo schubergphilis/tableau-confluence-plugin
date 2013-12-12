@@ -104,7 +104,7 @@ public class TableauRendererTest {
         // arrange
         _testRenderer.withWorkbook("TableauWorkbook")
                      .withReport("TableauReport")
-                     .withHost("http://localhost", "http://localhost/trusted/123456789")
+                     .withHost("http://localhost", "123456789")
                      .withInteractiveButton(true)
                      .withParameters("param1=false&param2=true");
 
@@ -121,7 +121,7 @@ public class TableauRendererTest {
         _testRenderer.withWorkbook("TableauWorkbook")
                      .withSize(500, 500)
                      .withReport("TableauReport")
-                     .withHost("http://localhost", "http://localhost/trusted/123456789")
+                     .withHost("http://localhost", "123456789")
                      .withInteractiveButton(true)
                      .withParameters("param1=false&param2=true");
 
@@ -140,7 +140,7 @@ public class TableauRendererTest {
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .render();
 
@@ -154,7 +154,7 @@ public class TableauRendererTest {
         String result = _testRenderer
                 .withWorkbook("Tableau Workbook")
                 .withReport("TableauReport")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .render();
 
@@ -168,7 +168,7 @@ public class TableauRendererTest {
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
                 .withReport("Tableau Report")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .render();
 
@@ -183,7 +183,7 @@ public class TableauRendererTest {
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
                 .withInteractiveButton(true)
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withTabs(true)
                 .render();
 
@@ -198,7 +198,7 @@ public class TableauRendererTest {
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
                 .withInteractiveButton(true)
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withTabs(true)
                 .render();
 
@@ -213,7 +213,7 @@ public class TableauRendererTest {
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
                 .withInteractiveButton(true)
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withTitle("The title")
                 .render();
 
@@ -228,7 +228,7 @@ public class TableauRendererTest {
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
                 .withInteractiveButton(true)
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withSize(200, 150)
                 .render();
 
@@ -242,7 +242,7 @@ public class TableauRendererTest {
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .withEmbed(false)
                 .render();
@@ -258,7 +258,7 @@ public class TableauRendererTest {
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
                 .withInteractiveButton(true)
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withEmbed(true)
                 .render();
 
@@ -272,7 +272,7 @@ public class TableauRendererTest {
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .withToolbar(false)
                 .render();
@@ -287,7 +287,7 @@ public class TableauRendererTest {
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .withToolbar(true)
                 .render();
@@ -302,7 +302,7 @@ public class TableauRendererTest {
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
                 .withReport("TableauReport")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withBorderStyle("border: 1px solid red;")
                 .withInteractiveButton(true)
                 .render();
@@ -316,7 +316,7 @@ public class TableauRendererTest {
         // arrange
         _testRenderer.withWorkbook("Tableau Workbook")
                      .withReport("Tableau Report")
-                     .withHost("http://localhost", "http://localhost/trusted/123456789")
+                     .withHost("http://localhost", "123456789")
                      .withInteractiveButton(true)
                      .withInteractiveStart(true);
 
@@ -332,7 +332,7 @@ public class TableauRendererTest {
         // arrange
         _testRenderer.withWorkbook("SomeWorkBook")
                      .withReport("Tableau_Report")
-                     .withHost("https://localhost", "https://localhost/trusted/123456789")
+                     .withHost("https://localhost", "123456789")
                      .withParameters("p=1")
                      .withInteractiveStart(true)
                      .withExportContext(true);
@@ -350,7 +350,7 @@ public class TableauRendererTest {
         // arrange
         _testRenderer.withWorkbook("Tableau Workbook")
                      .withReport("Tableau Report")
-                     .withHost("http://localhost", "http://localhost/trusted/123456789")
+                     .withHost("http://localhost", "123456789")
                      .withExportContext(true);
 
         // act
@@ -366,7 +366,7 @@ public class TableauRendererTest {
         // arrange
         _testRenderer.withWorkbook("Tableau Workbook")
                      .withReport("Tableau Report")
-                     .withHost("http://localhost", "http://localhost/trusted/123456789")
+                     .withHost("http://localhost", "123456789")
                      .withInteractiveStart(true)
                      .withParameters("test=bla&foo=bar")
                      .withSize(1200, 1200);
@@ -386,7 +386,7 @@ public class TableauRendererTest {
                 .withReport("view1")
                 .withSize(500, 500)
                 .withParameters("a=1&b=2")
-                .withHost("http://localhost", "http://localhost/trusted/123456789")
+                .withHost("http://localhost", "123456789")
                 .withRefresh(true);
 
         // act
@@ -404,13 +404,31 @@ public class TableauRendererTest {
                 .withReport("view1")
                 .withSize(500, 500)
                 .withSite("site")
-                .withHost("http://localhost", "http://localhost/trusted/123456789");
+                .withHost("http://localhost", "123456789");
 
         // act
         String result = _testRenderer.render();
 
         // assert
         String expect = "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/t/site/views/ExampleWorkbook/view1.png?:size=500,500\"></img></div><br/>";
+        assertEquals(result, expect);
+    }
+
+    @Test
+    public void when_no_ticket_provided_dont_use_trusted_url() throws ValidationException {
+        // arrange
+        _testRenderer.withWorkbook("ExampleWorkbook")
+                .withReport("view1")
+                .withSize(500, 500)
+                .withSite("site")
+                .withHost("http://localhost", null);
+
+        // act
+        String result = _testRenderer.render ();
+
+        // assert
+        String expect = "<div style=\"display:inline-block;\"><img src=\"http://localhost/t/site/views/ExampleWorkbook/view1.png?:size=500,500\"></img></div><br/>";
+
         assertEquals(result, expect);
     }
 }
