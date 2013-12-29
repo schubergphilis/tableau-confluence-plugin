@@ -35,9 +35,9 @@ Tableau 7.x
 
     ```<Location ~ "^/(?!(t/[^/]*/)?(manual|auth|dataserver)).*">```
 
-3. Add 'trusted' and 'vizql/trusted' to the regular expression:
+3. Add 'trusted' and 'vizql' to the regular expression:
 
-    ```<Location ~ "^/(?!(t/[^/]*/)?(manual|auth|trusted|vizql/trusted|dataserver)).*">```
+    ```<Location ~ "^/(?!(t/[^/]*/)?(manual|auth|trusted|vizql|dataserver)).*">```
 
 ### Disable client ip checking
 Run following tabadmin commands:
@@ -93,7 +93,7 @@ Possible parameters:
 | ----------- | ------------- | ------------------------------------- |
 | title       |               | name of report, this title is shown when opening the full page interactive view from the 'interactive button' |
 | workbook    |               | workbook name on the Tableau server (case sensitive) |
-| report      |               | report name in the workbook (case sensitive) |
+| view        |               | name of the view in the workbook (case sensitive) |
 | height      | 550           | height in number of pixels |
 | width       | 1280          | width in number of pixels |
 | environment | prod          | option to point to other environment configured in section 'Configuration of plugin', for example use acc for acceptance environment |
@@ -116,16 +116,16 @@ Examples:
 
 Basic example:
 
-    {tableau-plugin:workbook=TestWorkbook|report=Sheet1}
+    {tableau-plugin:workbook=TestWorkbook|view=Sheet1}
 
 Set width and height
 
-    {tableau-plugin:workbook=TestWorkbook|report=Sheet1|width=1500|height=800}
+    {tableau-plugin:workbook=TestWorkbook|view=Sheet1|width=1500|height=800}
 
 Open interactive view and point to acceptance environment
 
-    {tableau-plugin:workbook=TestWorkbook|report=Sheet1|interactive=true|environment=acc}
+    {tableau-plugin:workbook=TestWorkbook|view=Sheet1|interactive=true|environment=acc}
 
 Example of using parameters
 
-    {tableau-plugin:workbook=TestWorkbook|report=Sheet1|parameters=colour=blue&othervalue=100}
+    {tableau-plugin:workbook=TestWorkbook|view=Sheet1|parameters=colour=blue&othervalue=100}

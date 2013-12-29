@@ -63,7 +63,7 @@ public class TableauRendererTest {
     public void render_Should_Throw_ValidationException_When_Empty_Workbook_Given()
     {
         // arrange
-        _testRenderer.withWorkbook("").withReport("Report");
+        _testRenderer.withWorkbook("").withView("Report");
 
         // act and assert
         renderAndExpectException("parameter workbook is missing", ValidationException.class);
@@ -73,17 +73,17 @@ public class TableauRendererTest {
     public void render_Should_Throw_ValidationException_When_Empty_Report_Given()
     {
         // arrange
-        _testRenderer.withWorkbook("TableauWorkbook").withReport("");
+        _testRenderer.withWorkbook("TableauWorkbook").withView("");
 
         // act and assert
-        renderAndExpectException("parameter report is missing", ValidationException.class);
+        renderAndExpectException("parameter view is missing", ValidationException.class);
     }
 
     @Test
     public void render_Should_Throw_ValidationException_When_No_TableauHost_Given()
     {
         // arrange
-        _testRenderer.withWorkbook("TableauWorkbook").withReport("TableauReport");
+        _testRenderer.withWorkbook("TableauWorkbook").withView("TableauReport");
 
         // act and assert
         renderAndExpectException("parameter tableau host is missing", ValidationException.class);
@@ -93,7 +93,7 @@ public class TableauRendererTest {
     public void render_Should_Throw_ValidationException_When_Empty_TableauHost_Given()
     {
         // arrange
-        _testRenderer.withWorkbook("TableauWorkbook").withReport("TableauReport").withHost("", "");
+        _testRenderer.withWorkbook("TableauWorkbook").withView("TableauReport").withHost("", "");
 
         // act and assert
         renderAndExpectException("parameter tableau host is missing", ValidationException.class);
@@ -103,7 +103,7 @@ public class TableauRendererTest {
     public void render_Should_Render_Extra_Tableau_Parameters_If_Provided() throws ValidationException, UnsupportedEncodingException {
         // arrange
         _testRenderer.withWorkbook("TableauWorkbook")
-                     .withReport("TableauReport")
+                     .withView("TableauReport")
                      .withHost("http://localhost", "123456789")
                      .withInteractiveButton(true)
                      .withParameters("param1=false&param2=true");
@@ -112,7 +112,7 @@ public class TableauRendererTest {
         String result = _testRenderer.render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png?param1=false&param2=true\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"param1=false&param2=true\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png?param1=false&param2=true\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"param1=false&param2=true\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -120,7 +120,7 @@ public class TableauRendererTest {
         // arrange
         _testRenderer.withWorkbook("TableauWorkbook")
                      .withSize(500, 500)
-                     .withReport("TableauReport")
+                     .withView("TableauReport")
                      .withHost("http://localhost", "123456789")
                      .withInteractiveButton(true)
                      .withParameters("param1=false&param2=true");
@@ -129,7 +129,7 @@ public class TableauRendererTest {
         String result = _testRenderer.render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png?:size=500,500&param1=false&param2=true\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"param1=false&param2=true\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png?:size=500,500&param1=false&param2=true\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"param1=false&param2=true\"  value=\"Open interactive view\" /></div><br/>");
 
 
     }
@@ -139,13 +139,13 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -153,13 +153,13 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("Tableau Workbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -167,13 +167,13 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("Tableau Report")
+                .withView("Tableau Report")
                 .withHost("http://localhost", "123456789")
-                .withInteractiveButton(true)
+                .withInteractiveButton(true)                               
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -181,14 +181,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withInteractiveButton(true)
                 .withHost("http://localhost", "123456789")
                 .withTabs(true)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"yes\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"yes\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -196,14 +196,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withInteractiveButton(true)
                 .withHost("http://localhost", "123456789")
                 .withTabs(true)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"yes\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"yes\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -211,14 +211,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withInteractiveButton(true)
                 .withHost("http://localhost", "123456789")
                 .withTitle("The title")
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"The title\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"The title\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -226,14 +226,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withInteractiveButton(true)
                 .withHost("http://localhost", "123456789")
                 .withSize(200, 150)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png?:size=200,150\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png?:size=200,150\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -241,14 +241,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .withEmbed(false)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"no\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"no\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -256,14 +256,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withInteractiveButton(true)
                 .withHost("http://localhost", "123456789")
                 .withEmbed(true)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -271,14 +271,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .withToolbar(false)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"no\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"no\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -286,14 +286,14 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withHost("http://localhost", "123456789")
                 .withInteractiveButton(true)
                 .withToolbar(true)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
@@ -301,21 +301,21 @@ public class TableauRendererTest {
         // arrange and act
         String result = _testRenderer
                 .withWorkbook("TableauWorkbook")
-                .withReport("TableauReport")
+                .withView("TableauReport")
                 .withHost("http://localhost", "123456789")
                 .withBorderStyle("border: 1px solid red;")
                 .withInteractiveButton(true)
                 .render();
 
         // assert
-        assertEquals(result, "<div style=\"display:inline-block;border: 1px solid red;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" report=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
+        assertEquals(result, "<div style=\"display:inline-block;border: 1px solid red;\"><img src=\"http://localhost/trusted/123456789/views/TableauWorkbook/TableauReport.png\"></img><br/><input type=\"button\" workbook=\"TableauWorkbook\" view=\"TableauReport\" tableau_host=\"http://localhost\" title=\"\" embed=\"yes\" toolbar=\"yes\" tabs=\"no\" parameters=\"\"  value=\"Open interactive view\" /></div><br/>");
     }
 
     @Test
     public void withInteractiveStart_Should_Render_Tableau_Iframe() throws ValidationException, UnsupportedEncodingException {
         // arrange
         _testRenderer.withWorkbook("Tableau Workbook")
-                     .withReport("Tableau Report")
+                     .withView("Tableau Report")
                      .withHost("http://localhost", "123456789")
                      .withInteractiveButton(true)
                      .withInteractiveStart(true);
@@ -331,7 +331,7 @@ public class TableauRendererTest {
     public void withExportContext_And_Interactive_Mode_Should_Render_Png_Format() throws ValidationException, UnsupportedEncodingException {
         // arrange
         _testRenderer.withWorkbook("SomeWorkBook")
-                     .withReport("Tableau_Report")
+                     .withView("Tableau_Report")
                      .withHost("https://localhost", "123456789")
                      .withParameters("p=1")
                      .withInteractiveStart(true)
@@ -349,7 +349,7 @@ public class TableauRendererTest {
 
         // arrange
         _testRenderer.withWorkbook("Tableau Workbook")
-                     .withReport("Tableau Report")
+                     .withView("Tableau Report")
                      .withHost("http://localhost", "123456789")
                      .withExportContext(true);
 
@@ -365,7 +365,7 @@ public class TableauRendererTest {
     {
         // arrange
         _testRenderer.withWorkbook("Tableau Workbook")
-                     .withReport("Tableau Report")
+                     .withView("Tableau Report")
                      .withHost("http://localhost", "123456789")
                      .withInteractiveStart(true)
                      .withParameters("test=bla&foo=bar")
@@ -383,7 +383,7 @@ public class TableauRendererTest {
     {
         // arrange
         _testRenderer.withWorkbook("ExampleWorkbook")
-                .withReport("view1")
+                .withView("view1")
                 .withSize(500, 500)
                 .withParameters("a=1&b=2")
                 .withHost("http://localhost", "123456789")
@@ -401,7 +401,7 @@ public class TableauRendererTest {
     public void with_Site_Should_Use_Site_In_Url() throws ValidationException {
         // arrange
         _testRenderer.withWorkbook("ExampleWorkbook")
-                .withReport("view1")
+                .withView("view1")
                 .withSize(500, 500)
                 .withSite("site")
                 .withHost("http://localhost", "123456789");
@@ -418,7 +418,7 @@ public class TableauRendererTest {
     public void when_no_ticket_provided_dont_use_trusted_url() throws ValidationException {
         // arrange
         _testRenderer.withWorkbook("ExampleWorkbook")
-                .withReport("view1")
+                .withView("view1")
                 .withSize(500, 500)
                 .withSite("site")
                 .withHost("http://localhost", null);

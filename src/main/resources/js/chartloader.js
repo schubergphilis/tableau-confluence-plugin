@@ -21,7 +21,6 @@
  *      specific language governing permissions and limitations
  *      under the License.
  **/
-
 jQuery(document).ready(
     function()
     {
@@ -93,7 +92,7 @@ function initChartControl()
     );
 
     // add click event to elements with a workbook/chart attr
-    jQuery('*[workbook][report]').click(
+    jQuery('*[workbook][view]').click(
         function()
         {
             openChart(dialog, this)
@@ -103,15 +102,15 @@ function initChartControl()
 function openChart(target, source)
 {
     var workbook = jQuery(source).attr( 'workbook' );
-    var report = jQuery(source).attr( 'report' );
-    var title = jQuery(source).attr('title') ? jQuery(source).attr('title') : report;
+    var view = jQuery(source).attr( 'view' );
+    var title = jQuery(source).attr('title') ? jQuery(source).attr('title') : view;
     var host = jQuery(source).attr('tableau_host');
     var embed = jQuery(source).attr('embed');
     var toolbar = jQuery(source).attr('toolbar');
     var tabs = jQuery(source).attr('tabs');
     var params = jQuery(source).attr('parameters');
 
-    var url = host + "/views/" + workbook + "/" + report;
+    var url = host + "/views/" + workbook + "/" + view;
     url += "?:embed=" + embed
             + "&:toolbar=" + toolbar
             + "&:tabs=" + tabs;

@@ -34,7 +34,7 @@ public class TableauRenderer extends BaseHtmlRenderer
     private String _trustedHost;
     private String _title;
     private String _workbook;
-    private String _report;
+    private String _view;
     private String _borderStyle;
     private Integer _width;
     private Integer _height;
@@ -81,9 +81,9 @@ public class TableauRenderer extends BaseHtmlRenderer
         return this;
     }
 
-    public TableauRenderer withReport(String report)
+    public TableauRenderer withView(String view)
     {
-        _report = report.replace(" ", "");
+        _view = view.replace(" ", "");
         return this;
     }
 
@@ -175,7 +175,7 @@ public class TableauRenderer extends BaseHtmlRenderer
     private String tableauAttributes() {
         return new StringBuffer()
             .append(htmlAttribute("workbook", _workbook))
-            .append(htmlAttribute("report", _report))
+            .append(htmlAttribute("view", _view))
             .append(htmlAttribute("tableau_host", _host))
             .append(htmlAttribute("title", _title == null ? "" : _title))
             .append(htmlAttribute("embed", (_embed ? "yes" : "no")))
@@ -193,7 +193,7 @@ public class TableauRenderer extends BaseHtmlRenderer
                     .concat("/views/")
                     .concat(_workbook)
                     .concat("/")
-                    .concat(_report);
+                    .concat(_view);
     }
 
     private String getBorderStyle()
@@ -209,10 +209,10 @@ public class TableauRenderer extends BaseHtmlRenderer
         if(_workbook == null || _workbook.length() == 0)
             return "parameter workbook is missing";
 
-        if(_report == null || _report.length() == 0)
-            return "parameter report is missing";
+        if(_view == null || _view.length() == 0)
+            return "parameter view is missing";
 
-        if(_trustedHost == null || _report.length() == 0)
+        if(_trustedHost == null || _view.length() == 0)
             return "parameter tableau host is missing";
 
         return null;

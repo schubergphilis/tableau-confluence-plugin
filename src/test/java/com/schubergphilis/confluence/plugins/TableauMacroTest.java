@@ -120,7 +120,7 @@ public class TableauMacroTest {
 
         // expects for renderer
         when(_mockTableauRenderer.withSize(_width, _height)).thenReturn(_mockTableauRenderer);
-        when(_mockTableauRenderer.withReport(_report)).thenReturn(_mockTableauRenderer);
+        when(_mockTableauRenderer.withView(_report)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withWorkbook(_workbook)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withTitle(_title)).thenReturn(_mockTableauRenderer);
         when(_mockTableauRenderer.withInteractiveStart(_interactive)).thenReturn(_mockTableauRenderer);
@@ -141,7 +141,7 @@ public class TableauMacroTest {
     {
         Map<String,String> result = new HashMap<String,String>();
         result.put("workbook","Workbook");
-        result.put("report","view1");
+        result.put("view","view1");
         result.put("title","");
         result.put("environment","prod");
         result.put("borderstyle","");

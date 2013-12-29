@@ -65,7 +65,8 @@ public class TableauMacro extends SbpBaseMacro
     {
         String workbook = getStrParameter(params, "workbook");
         String report = getStrParameter(params, "report");
-        String title = getStrParameter(params, "title", report);
+        String view = getStrParameter(params, "view", report);
+        String title = getStrParameter(params, "title", view);
         String environment = getStrParameter(params, "environment", "prod");
         String borderStyle = getStrParameter(params, "borderstyle", "");
         Integer height = getIntParameter(params, "height", 550);
@@ -91,12 +92,12 @@ public class TableauMacro extends SbpBaseMacro
         if(isExportContext && noPrint)
             return "";
 
-        if(RenderContext.PREVIEW.equals(renderContext.getOutputType()) && ( workbook.length() == 0 || report.length() == 0))
+        if(RenderContext.PREVIEW.equals(renderContext.getOutputType()) && ( workbook.length() == 0 || view.length() == 0))
             return "Please provide a workbook and a report and hit the refresh button.";
 
         TableauRenderer renderer = getTableauRenderer()
             .withSize(width, height)
-            .withReport(report)
+            .withView(view)
             .withWorkbook(workbook)
             .withTitle(title)
             .withInteractiveStart(interactive)

@@ -1,7 +1,7 @@
 <atlassian-plugin key="${project.artifactId}" name="Schuberg Philis Tableau plugin" plugins-version="2">
     <plugin-info>
         <description>Tableau plugin for confluence</description>
-        <version>0.9</version>
+        <version>0.91</version>
         <vendor name="Schuberg Philis" url="http://www.schubergphilis.com" />
         <param name="configure.url">/admin/plugins/tableau-plugin/configure.action</param>
     </plugin-info>
@@ -26,8 +26,10 @@
         <description>This macros embeds a tableau view</description>
         <parameters>
             <parameter name="title" type="string"/>
-            <parameter name="workbook" type="string"/>
-            <parameter name="report" type="string"/>
+            <parameter name="workbook" type="string" required="true"/>
+            <parameter name="view" type="string" required="true">
+                <alias name="report" />
+            </parameter>
             <parameter name="height" type="string" default="550" />
             <parameter name="width" type="string" default="1280" />
             <parameter name="environment" type="string" default="prod"/>
