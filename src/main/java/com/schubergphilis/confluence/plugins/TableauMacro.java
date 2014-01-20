@@ -60,7 +60,7 @@ public class TableauMacro extends SbpBaseMacro
         return RenderMode.NO_RENDER;
     }
 
-    public String renderPlugin(Map params, RenderContext renderContext)
+    public String renderPlugin(Map params, String outputType)
             throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException
     {
         String workbook = getStrParameter(params, "workbook");
@@ -86,13 +86,13 @@ public class TableauMacro extends SbpBaseMacro
         String disableClientTrustedAuthValue = getConfigurationManager().getValue("disableclienttrustedauth", "false");
         boolean disableClientTrustedAuth = disableClientTrustedAuthValue.toLowerCase().startsWith("t");
 
-        Boolean isExportContext = isPdfOrWordOutput(renderContext);
+        Boolean isExportContext = isPdfOrWordOutput(outputType);
 
         // skip for exporting to pdf/word or preview mode
         if(isExportContext && noPrint)
             return "";
 
-        if(RenderContext.PREVIEW.equals(renderContext.getOutputType()) && ( workbook.length() == 0 || view.length() == 0))
+        if(RenderContext.PREVIEW.equals(outputType) && ( workbook.length() == 0 || view.length() == 0))
             return "Please provide a workbook and a report and hit the refresh button.";
 
         TableauRenderer renderer = getTableauRenderer()
@@ -165,9 +165,9 @@ public class TableauMacro extends SbpBaseMacro
         renderer.withHost(hostForRenderer, ticket);
     }
 
-    private boolean isPdfOrWordOutput(RenderContext context)
+    private boolean isPdfOrWordOutput(String outputType)
     {
-        return RenderContext.PDF.equals(context.getOutputType()) || RenderContext.WORD.equals(context.getOutputType());
+        return RenderContext.PDF.equals(outputType) || RenderContext.WORD.equals(outputType);
     }
 
     @Override

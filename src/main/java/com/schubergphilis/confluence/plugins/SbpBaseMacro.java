@@ -25,10 +25,12 @@
 
 package com.schubergphilis.confluence.plugins;
 
+import com.atlassian.confluence.content.render.xhtml.ConversionContext;
 import com.atlassian.bandana.BandanaManager;
 import com.atlassian.plugin.webresource.WebResourceManager;
 import com.atlassian.renderer.RenderContext;
 import com.atlassian.renderer.v2.macro.MacroException;
+import com.atlassian.confluence.macro.MacroExecutionException;
 import com.schubergphilis.confluence.exceptions.AuthenticationException;
 import com.schubergphilis.confluence.exceptions.ValidationException;
 import org.apache.log4j.Logger;
@@ -38,7 +40,7 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
-public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseMacro
+public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseMacro implements com.atlassian.confluence.macro.Macro
 {
     protected WebResourceManager _webResourceManager;
     protected BandanaManager _bandanaManager;
@@ -83,11 +85,29 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
         return returnVal;
     }
 
-    public String execute(Map params, String body, RenderContext renderContext) throws MacroException {
+    public String execute(Map params, String body, RenderContext renderContext) throws MacroException
+    {
+        return run_renderPlugin(params, renderContext.getOutputType());
+    }
+
+    public String execute(Map params, String body, ConversionContext conversionContext) throws MacroExecutionException
+    {
+        try
+        {
+            return run_renderPlugin(params, conversionContext.getOutputType());
+        }
+        catch (MacroException e)
+        {
+            throw new MacroExecutionException(e.getMessage().toString());
+        }
+    }
+
+    public String run_renderPlugin(Map params, String outputType) throws MacroException, NullPointerException
+    {
         includeResources();
         try
         {
-            return renderPlugin(params, renderContext);
+            return renderPlugin(params, outputType);
         }
         catch (ValidationException e)
         {
@@ -99,6 +119,10 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
             log.error("authentication error: ".concat(e.getMessage().toString()).concat(" please contact your confluence or tableau server administrator"));
             throw new MacroException("authentication error: there is an authentication problem while retrieving the report, please contact your confluence or tableau server administrator");
         }
+		catch (NullPointerException e)
+		{
+			throw e;
+		}
         catch (Exception e)
         {
             log.error("unexpected error: please contact your confluence or tableau server administrator, ".concat(e.toString()));
@@ -106,6 +130,16 @@ public abstract class SbpBaseMacro extends com.atlassian.renderer.v2.macro.BaseM
         }
     }
 
+    public BodyType getBodyType()
+    {
+        return BodyType.NONE;
+    }
+
+    public OutputType getOutputType()
+    {
+        return OutputType.BLOCK;
+    }
+
     abstract void includeResources();
-    abstract String renderPlugin(Map params, RenderContext renderContext) throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException;
+    abstract String renderPlugin(Map params, String outputType) throws ValidationException, AuthenticationException, IOException, NoSuchAlgorithmException, KeyManagementException;
 }
