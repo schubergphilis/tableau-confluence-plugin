@@ -5,40 +5,6 @@
 * Embed tableau reports in confluence
 
 ## Tableau Server Configuration
-* Alter httpd template
-By default, tableau runs either in SSPI mode or you can configure trusted authentication for authentication. But what if you want to do both?
-In our situation we use a plugin to export reports on confluence pages, so confluence needs to authenticate with the user credentials of the currently logged on user. And normal users should be able to use SSPI.
-
-To enable both features alter the file with filename: httpd.conf.templ
-
-Tableau 6.x
-
-1. Open the template file:
-
-    ```C:\Program Files (x86)\Tableau Server\6.0\templates```
-
-2. Search for entry:
-
-    ```<Location ~ "^/(?!manual|auth).*">```
-
-3. Add 'trusted' to the regular expression:
-
-    ```<Location ~ "^/(?!manual|auth|trusted).*">```
-
-Tableau 7.x
-
-1. Open the template file:
-
-    ```C:\Program Files (x86)\Tableau Server\7.0\templates```
-
-2. Search for the entry:
-
-    ```<Location ~ "^/(?!(t/[^/]*/)?(manual|auth|dataserver)).*">```
-
-3. Add 'trusted' and 'vizql' to the regular expression:
-
-    ```<Location ~ "^/(?!(t/[^/]*/)?(manual|auth|trusted|vizql|dataserver)).*">```
-
 ### Disable client ip checking
 Run following tabadmin commands:
 Note tabadmin can be found here: "C:\Program Files (x86)\Tableau\Tableau Server\7.0\bin"
@@ -60,9 +26,7 @@ For more information see the tableau server admin reference (page 224 / 225 / 22
 http://downloads.tableausoftware.com/quickstart/server-guides/en-us/server_admin7.0.pdf
 
 ## Installation of plugin
-* Get the jar
-    * Download the latest jar file from: https://plugins.atlassian.com/plugins/tableau-plugin
-	* Or build it from the source : https://github.com/schubergphilis/tableau-confluence-plugin
+* Install the plugin by downloading it via the atlassian marketplace
 * Login as a confluence admin
 * Goto the menu 'Browse'
 * Choose 'Confluence Admin'
