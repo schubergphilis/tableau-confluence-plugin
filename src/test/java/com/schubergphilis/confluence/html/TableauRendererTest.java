@@ -393,7 +393,7 @@ public class TableauRendererTest {
         String result = _testRenderer.render();
 
         // assert
-        String expect = "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/ExampleWorkbook/view1.png?:size=500,500&a=1&b=2&:refresh=yes\"></img></div><br/>";
+        String expect = "<div style=\"display:inline-block;\"><img src=\"http://localhost/trusted/123456789/views/ExampleWorkbook/view1.png?:refresh=yes&:size=500,500&a=1&b=2\"></img></div><br/>";
         assertEquals(result, expect);
     }
 
