@@ -86,9 +86,9 @@
         </plugins>
     </build>
     <properties>
-        <confluence.version>5.8.10</confluence.version>
-        <confluence.data.version>5.8.10</confluence.data.version>
-        <amps.version>5.1.11</amps.version>
+        <confluence.version>5.10.0</confluence.version>
+        <confluence.data.version>5.10.0</confluence.data.version>
+        <amps.version>6.2.1</amps.version>
     </properties>
     <developers>
         <developer>
